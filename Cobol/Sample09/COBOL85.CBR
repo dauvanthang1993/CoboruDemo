@@ -1,0 +1,17 @@
+@CBR_DocumentName_DOC1=ＦＣＢを使用した帳票印刷サンプル
+@CBR_DocumentName_DOC2=各種文字属性印字サンプル集
+@CBR_OverlayPrintOffset=VALID
+@CBR_OverlayPrintSPEC=COBOL
+@CBR_PrinterANK_Size=TYPE-PC
+@CBR_PrintTextPosition=TYPE2
+@CBR_TextAlign=BOTTOM
+@DefaultFCB_Name=FCBDFLT
+@PrinterFontName=(ＭＳ 明朝,ＭＳ ゴシック)
+@PRN_FormName_XXX=売り上げ伝票
+FCBA4L6=LPI((6)),CH1(1),FORM(A4,LAND)
+FCBA4L8=LPI((8)),CH1(1),FORM(A4,LAND)
+FCBDFLT=LPI((6,66)),CH1(4),SIZE(110)
+FCBLPI6=LPI((6)),CH1(2),FORM(B4,LAND)
+FOVLDIR=.\
+FOVLTYPE=KOL5
+OVD_SUFFIX=OVD

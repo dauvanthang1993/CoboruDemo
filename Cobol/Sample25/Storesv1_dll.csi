@@ -1,0 +1,27 @@
+[Component]
+Csi Version=1.0
+Project Name=STORESV1.PRJ
+Server Name=STORESV1.DLL
+Server Version=1.0
+Description=
+Compatible=2
+coclassnum=1
+classnum=1
+[GUID]
+typelibid=A4026291-A917-11D3-96EE-00A0C922D78E
+coclass_1=A4026293-A917-11D3-96EE-00A0C922D78E
+f_coclass_1=A4026294-A917-11D3-96EE-00A0C922D78E
+disp_coclass_1=A4026295-A917-11D3-96EE-00A0C922D78E
+
+[Class Name]
+coclass_1=ONLINE_STORE
+f_coclass_1=FACTORY_ONLINE_STORE
+disp_coclass_1=_ONLINE_STORE
+[Rep Files]
+coclass_1=ONLINE_STORE.REP
+[Source Files]
+coclass_1=ONLINE_STORE.COB
+[Class Version]
+coclass_1=1.0
+[Class Description]
+coclass_1=

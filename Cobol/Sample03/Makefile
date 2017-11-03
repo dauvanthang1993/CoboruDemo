@@ -1,0 +1,41 @@
+###############################################################################
+#                               NetCOBOL
+###############################################################################
+
+COBFLAGS=
+LINKOPTION =
+
+ALL : SAMPLE3.EXE DENPYOU.DLL
+
+REBUILD : CLEAN ALL
+CLEAN :
+	DEL "SAMPLE3.EXE"
+	DEL "SAMPLE3.OBJ"
+	DEL "DENPYOU.DLL"
+	DEL "DENPYOU.OBJ"
+	DEL "DENPYOU.LIB"
+	DEL "DENPYOU.EXP"
+
+"SAMPLE3.OBJ" : "SAMPLE3.COB" "..\SAMPLE02\Syohinm.cbl" "Uriage.cbl" "DENPYO01.SMD" "DENPYO02.SMD" "MAKEFILE"
+	COBOL32.EXE -M -I. -I..\Sample02 -m. $(COBFLAGS) "SAMPLE3.COB"
+
+"DENPYOU.OBJ" : "DENPYOU.COB" "DENPYO01.SMD" "DENPYO02.SMD" "MAKEFILE"
+	COBOL32.EXE -I. -I..\Sample02 -m. $(COBFLAGS) "DENPYOU.COB"
+
+"DENPYOU.DLL" : "DENPYOU.OBJ"
+	"LINK.EXE" $(LINKOPTION) \
+	/DLL /NOENTRY \
+	/DYNAMICBASE:NO \
+	/OUT:"DENPYOU.DLL" \
+	"DENPYOU.OBJ" \
+	"F3BICIMP.LIB"
+
+"SAMPLE3.EXE" : "SAMPLE3.OBJ" "DENPYOU.DLL"
+	LINK.EXE $(LINKOPTION) \
+	/DYNAMICBASE:NO \
+	/OUT:"SAMPLE3.EXE" \
+	"SAMPLE3.OBJ" \
+	"F3BICIMP.LIB" \
+	"DENPYOU.LIB" \
+	"MSVCRT.LIB" 
+

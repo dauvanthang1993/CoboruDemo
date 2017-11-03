@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Sample17_DLL" default="incremental_build" basedir=".">
+	<fail unless="eclipse.running"
+	      message="このAntスクリプトはCOBOLビルダが内部的に利用するためのものであり、直接実行することはできません。" />
+	<property name="project.name" value="${ant.project.name}" />
+	<property name="foe" value="true" />
+	<eclipse.convertPath property="workspace_location" resourcepath="/" />
+	<eclipse.convertPath property="project_location"
+	                     resourcepath="/${project.name}" />
+	<property name="apdesigner.build.version" value="3.0.1" />
+	<property name="NETCOBOL" value="C:\Program Files (x86)\NetCOBOL" />
+
+	<target name="init">
+	</target>
+
+	<target name="cobol_buildtool-init"
+	        description="プロパティの初期化中"
+	        unless="cobol_buildtool-initialized">
+		<property name="cobol_buildtool-initialized" value="" />
+		<property name="project_location_SAMPLE17_LIB"
+		          value="${workspace_location}\SAMPLE17_LIB" />
+		<property name="project_location_SAMPLE16"
+		          value="${workspace_location}\SAMPLE16" />
+		<property name="project_location_SAMPLE17_DLL"
+		          value="${workspace_location}\SAMPLE17_DLL" />
+
+		<property name="cobol_buildtool-NAMECompilerOptions"
+		          value="  -I &quot;${project_location_SAMPLE17_LIB}&quot; -R &quot;${project_location_SAMPLE16}&quot; -R &quot;${project_location_SAMPLE17_DLL}&quot; -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),NAME&quot; " />
+		<property name="cobol_buildtool-CompilerOptions"
+		          value="  -I &quot;${project_location_SAMPLE17_LIB}&quot; -R &quot;${project_location_SAMPLE16}&quot; -R &quot;${project_location_SAMPLE17_DLL}&quot; -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR)&quot; " />
+		<property name="cobol_buildtool-CompilerOptionsOfMain"
+		          value="  -I &quot;${project_location_SAMPLE17_LIB}&quot; -R &quot;${project_location_SAMPLE16}&quot; -R &quot;${project_location_SAMPLE17_DLL}&quot; -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR)&quot; " />
+		<property name="cobol_buildtool-RepCompilerOptions"
+		          value="  -I &quot;${project_location_SAMPLE17_LIB}&quot; -R &quot;${project_location_SAMPLE16}&quot; -R &quot;${project_location_SAMPLE17_DLL}&quot; -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),CREATE(REP)&quot; " />
+		<property name="cobol_buildtool-CompilerOtherOptions" value="" />
+		<property name="cobol_buildtool-CobolCompiler" value="cobol32" />
+		<property name="cobol_buildtool-SourceFile" value="" />
+		<property name="cobol_buildtool-SourceReferenceFormat"
+		          value="SRF(VAR,VAR)" />
+		<property name="cobol_buildtool-UTF8Options" value="" />
+	</target>
+	<taskdef name="IAPWUptodate"
+	         classname="com.fujitsu.cbdt.build.taskdefs.IAPWUptodate" />
+
+	<target name="cobol_buildtool-compile_Spec.OBJ"
+	        description="ソースファイルの翻訳 Spec.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Spec.OBJ"
+	        if="cobol_buildtool-Spec.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Spec.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Spec.OBJ"
+	        description="Spec.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Spec.OBJ_uptodate"
+		              file="Spec.cob"
+		              outputFiles="Spec.OBJ"
+		              dependentFiles="C:\workspace\Sample17_DLL\SPECINFO.cbl;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Spec.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Spec.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Spec.cob または依存ファイル, C:\workspace\Sample17_DLL\SPECINFO.cbl " />
+	</target>
+
+	<target name="cobol_buildtool-compile_listiter.OBJ"
+	        description="ソースファイルの翻訳 listiter.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_listiter.OBJ"
+	        if="cobol_buildtool-listiter.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;listiter.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_listiter.OBJ"
+	        description="listiter.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-listiter.OBJ_uptodate"
+		              file="listiter.cob"
+		              outputFiles="listiter.OBJ"
+		              dependentFiles="C:\workspace\Sample17_DLL\LIST.rep;C:\workspace\Sample17_DLL\R_CONST.cbl;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_listiter.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-listiter.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: listiter.cob または依存ファイル, C:\workspace\Sample17_DLL\R_CONST.cbl " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Singletn.OBJ"
+	        description="ソースファイルの翻訳 Singletn.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Singletn.OBJ"
+	        if="cobol_buildtool-Singletn.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Singletn.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Singletn.OBJ"
+	        description="Singletn.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Singletn.OBJ_uptodate"
+		              file="Singletn.cob"
+		              outputFiles="Singletn.OBJ"
+		              dependentFiles="" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Singletn.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Singletn.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Singletn.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_ErrorPut.OBJ"
+	        description="ソースファイルの翻訳 ErrorPut.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_ErrorPut.OBJ"
+	        if="cobol_buildtool-ErrorPut.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;ErrorPut.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_ErrorPut.OBJ"
+	        description="ErrorPut.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-ErrorPut.OBJ_uptodate"
+		              file="ErrorPut.cob"
+		              outputFiles="ErrorPut.OBJ"
+		              dependentFiles="C:\workspace\Sample17_DLL\シングルトン.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_ErrorPut.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-ErrorPut.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: ErrorPut.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_SpecCtrl.OBJ"
+	        description="ソースファイルの翻訳 SpecCtrl.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_SpecCtrl.OBJ"
+	        if="cobol_buildtool-SpecCtrl.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;SpecCtrl.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_SpecCtrl.OBJ"
+	        description="SpecCtrl.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-SpecCtrl.OBJ_uptodate"
+		              file="SpecCtrl.cob"
+		              outputFiles="SpecCtrl.OBJ"
+		              dependentFiles="C:\workspace\Sample17_DLL\LIST.rep;C:\workspace\Sample17_DLL\R_CONST.cbl;C:\workspace\Sample17_DLL\SPECINFO.cbl;C:\workspace\Sample17_DLL\エラークラス.rep;C:\workspace\Sample17_DLL\リストイテレータ.rep;C:\workspace\Sample17_DLL\仕様クラス.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_SpecCtrl.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-SpecCtrl.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: SpecCtrl.cob または依存ファイル, C:\workspace\Sample17_DLL\R_CONST.cbl, C:\workspace\Sample17_DLL\SPECINFO.cbl " />
+	</target>
+
+	<target name="cobol_buildtool-FileCompile"
+	        description="ソースファイルの翻訳"
+	        depends="cobol_buildtool-init,init">
+		<exec dir="."
+		      executable="${cobol_buildtool-CobolCompiler}"
+		      failonerror="${foe}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions} ${cobol_buildtool-MainFileOption} ${cobol_buildtool-UTF8Options} &quot;${cobol_buildtool-SourceFile}&quot;" />
+		</exec>
+	</target>
+
+	<target name="link_buildtool-init"
+	        description="リンカのプロパティを初期化します。"
+	        unless="link_buildtool-initialized">
+		<property name="link_buildtool-initialized" value="" />
+		<property name="link_buildtool-LinkerOptions"
+		          value=" /DEBUG /DYNAMICBASE:NO " />
+		<property name="link_buildtool-LinkerLibraryOptions" value="" />
+		<property name="link_buildtool-LinkerDllEntryOptions" value="" />
+		<property name="link_buildtool-Linker" value="link" />
+	</target>
+
+	<target name="link_buildtool-link_build"
+	        description="SPECCTRL.dllの取得先にリンクします。"
+	        depends="link_buildtool-init,init,link_buildtool-check_SPECCTRL.dll"
+	        unless="link_buildtool-SPECCTRL.dll_uptodate">
+		<exec dir="."
+		      executable="${link_buildtool-Linker}"
+		      failonerror="${foe}">
+			<arg line="/LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86\&quot; /OUT:&quot;SPECCTRL.dll&quot; ${link_buildtool-LinkerOptions} ${link_buildtool-LinkerLibraryOptions} ${link_buildtool-LinkerDllEntryOptions}  /DLL &quot;Spec.OBJ&quot; &quot;SpecCtrl.OBJ&quot; &quot;listiter.OBJ&quot; &quot;ErrorPut.OBJ&quot; &quot;Singletn.OBJ&quot; &quot;C:\workspace\Sample17_DLL\COLLECT.lib&quot;  &quot;${NETCOBOL}\F3BICIMP.LIB&quot; &quot;/NOENTRY&quot; &quot;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86\KERNEL32.LIB&quot;" />
+		</exec>
+	</target>
+
+	<target name="link_buildtool-check_SPECCTRL.dll"
+	        description="SPECCTRL.dllが最新のファイルであるか調査中">
+		<uptodate property="link_buildtool-SPECCTRL.dll_uptodate">
+			<srcfiles dir=".">
+				<patternset>
+					<include name="Spec.OBJ" />
+					<include name="SpecCtrl.OBJ" />
+					<include name="listiter.OBJ" />
+					<include name="ErrorPut.OBJ" />
+					<include name="Singletn.OBJ" />
+				</patternset>
+			</srcfiles>
+			<srcfiles dir="C:\workspace\Sample17_DLL">
+				<patternset>
+					<include name="COLLECT.lib" />
+				</patternset>
+			</srcfiles>
+			<mapper type="merge" to="${project_location}\SPECCTRL.dll" />
+		</uptodate>
+	</target>
+	<target name="link_buildtool-link_rebuild">
+		<antcall target="link_buildtool-clean" />
+		<antcall target="link_buildtool-link_build" />
+	</target>
+
+	<target name="link_buildtool-clean"
+	        description="リンカのターゲットをすべてクリアします。"
+	        depends="link_buildtool-init,init">
+		<delete file="SPECCTRL.dll" />
+		<delete file="SPECCTRL.dll.in2" />
+		<delete file="SPECCTRL.exp" />
+		<delete file="SPECCTRL.lib" />
+
+	</target>
+
+	<target name="incremental_build"
+	        depends="cobol_buildtool-cobol_compile_build,link_buildtool-link_build" />
+
+	<target name="clean_build"
+	        depends="cobol_buildtool-clean,link_buildtool-clean" />
+</project>

@@ -1,0 +1,27 @@
+###############################################################################
+#                               NetCOBOL
+###############################################################################
+
+COBFLAGS=
+LINKOPTION = 
+
+ALL : SAMPLE13.DLL 
+
+REBUILD : CLEAN ALL
+CLEAN :
+	-DEL "SAMPLE13.OBJ"
+	-DEL "SAMPLE13.DLL"
+	-DEL "SAMPLE13.exp"
+	-DEL "SAMPLE13.lib"
+
+"SAMPLE13.OBJ" : "SAMPLE13.COB" "MAKEFILE_COBOL"
+	COBOL32.EXE -I.\ $(COBFLAGS) "SAMPLE13.COB"
+
+"SAMPLE13.DLL" : "SAMPLE13.OBJ"
+	"LINK.EXE" $(LINKOPTION) \
+	/DYNAMICBASE:NO \
+	/DLL /OUT:"SAMPLE13.DLL" \
+	/NOENTRY \
+	/EXPORT:SAMPLE13 \
+	"SAMPLE13.OBJ" \
+	"F3BICIMP.LIB"

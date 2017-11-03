@@ -1,0 +1,37 @@
+[Encoding]
+Encoding=UTF8
+
+[Apdesigner Version Information]
+Version No=6.0
+
+[CobolProject]
+Edition=6.000
+
+[SolutionOptionsUsing]
+ProjectCompilerOptionsCheck=on
+ProjectBuildToolResourceCheck=on
+ProjectRemoteTargetOptionsCheck=off
+ProjectBuildToolPreCompilerCheck=on
+ProjectBuildToolIDLPreCompilerCheck=off
+
+[CobolCompilerOptions]
+TAB=TAB(4)
+SRF=SRF(VAR,VAR)
+D-CHECK=CHECK(ALL)
+ForceCheckAllInDebugMode=true
+
+[TargetOptions]
+TargetName=COLLECT
+ApplicationArch=x86
+TargetType=DLL
+BuildMode=Debug
+DLLUseCBR=false
+
+[DependencyViewSourceFiles]
+CobolSourceFileCount=6
+CobolSourceFile6=L_Node.cob
+CobolSourceFile5=Dict.cob
+CobolSourceFile4=List.cob
+CobolSourceFile3=Bin_Tree.cob
+CobolSourceFile2=Collect.cob
+CobolSourceFile1=D_Node.cob

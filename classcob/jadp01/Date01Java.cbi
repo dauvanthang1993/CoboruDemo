@@ -1,0 +1,4 @@
+[Compile Options]
+ALPHAL=Yes WORD
+OPTIMIZE=Yes
+REPIN="..\..\..\rep"

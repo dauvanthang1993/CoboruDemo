@@ -1,0 +1,3 @@
+[Compile Options]
+SHREXT=Yes
+THREAD=MULTI

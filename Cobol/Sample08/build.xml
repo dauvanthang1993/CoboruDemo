@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Sample08" default="incremental_build" basedir=".">
+	<fail unless="eclipse.running"
+	      message="This ant script is used internally for COBOL Builder, and not intended to run directly." />
+	<property name="project.name" value="${ant.project.name}" />
+	<property name="foe" value="true" />
+	<eclipse.convertPath property="workspace_location" resourcepath="/" />
+	<eclipse.convertPath property="project_location"
+	                     resourcepath="/${project.name}" />
+	<property name="apdesigner.build.version" value="3.0.1" />
+	<property name="NETCOBOL" value="C:\Program Files (x86)\NetCOBOL" />
+
+	<target name="init">
+	</target>
+
+	<target name="cobol_buildtool-init"
+	        description="Initializing the properties"
+	        unless="cobol_buildtool-initialized">
+		<property name="cobol_buildtool-initialized" value="" />
+
+		<property name="cobol_buildtool-NAMECompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),NAME&quot; " />
+		<property name="cobol_buildtool-CompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR)&quot; " />
+		<property name="cobol_buildtool-CompilerOptionsOfMain"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),MAIN(WINMAIN)&quot; " />
+		<property name="cobol_buildtool-RepCompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),CREATE(REP)&quot; " />
+		<property name="cobol_buildtool-CompilerOtherOptions" value="" />
+		<property name="cobol_buildtool-CobolCompiler" value="cobol32" />
+		<property name="cobol_buildtool-SourceFile" value="" />
+		<property name="cobol_buildtool-SourceReferenceFormat"
+		          value="SRF(VAR,VAR)" />
+		<property name="cobol_buildtool-UTF8Options" value="" />
+	</target>
+	<taskdef name="IAPWUptodate"
+	         classname="com.fujitsu.cbdt.build.taskdefs.IAPWUptodate" />
+
+	<target name="cobol_buildtool-compile_Sample8.OBJ"
+	        description="Compiling the source file Sample8.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Sample8.OBJ"
+	        if="cobol_buildtool-Sample8.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptionsOfMain} ${cobol_buildtool-CompilerOtherOptions}  -M  -Dt &quot;Sample8.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Sample8.OBJ"
+	        description="Checking whether Sample8.OBJ is up to date"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Sample8.OBJ_uptodate"
+		              file="Sample8.cob"
+		              outputFiles="Sample8.OBJ"
+		              dependentFiles="" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Sample8.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Sample8.cob_and_dependent_present">
+		<fail message="File is missing: Sample8.cob or dependent files " />
+	</target>
+
+	<target name="cobol_buildtool-FileCompile"
+	        description="Compiling the source file"
+	        depends="cobol_buildtool-init,init">
+		<exec dir="."
+		      executable="${cobol_buildtool-CobolCompiler}"
+		      failonerror="${foe}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions} ${cobol_buildtool-MainFileOption} ${cobol_buildtool-UTF8Options} &quot;${cobol_buildtool-SourceFile}&quot;" />
+		</exec>
+	</target>
+	<target name="cobol_buildtool-cobol_compile_build">
+
+		<antcall target="cobol_buildtool-compile_Sample8.OBJ" />
+
+	</target>
+	<target name="cobol_buildtool-cobol_compile_rebuild">
+
+		<antcall target="cobol_buildtool-clean" />
+
+		<antcall target="cobol_buildtool-cobol_compile_build" />
+
+	</target>
+	<target name="cobol_buildtool-clean"
+	        description="Cleaning all the compiler targets"
+	        depends="cobol_buildtool-init,init">
+		<delete>
+			<fileset dir="." casesensitive="false">
+				<patternset>
+					<include name="Sample8.SVD" />
+					<include name="Sample8.OBJ" />
+
+				</patternset>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="link_buildtool-init"
+	        description="Initializing the linker properties"
+	        unless="link_buildtool-initialized">
+		<property name="link_buildtool-initialized" value="" />
+		<property name="link_buildtool-LinkerOptions"
+		          value=" /DEBUG /DYNAMICBASE:NO /INCREMENTAL:NO " />
+		<property name="link_buildtool-LinkerLibraryOptions" value="" />
+		<property name="link_buildtool-LinkerDllEntryOptions" value="" />
+		<property name="link_buildtool-Linker"
+		          value="&quot;C:\Program Files (x86)\NetCOBOL\link&quot;" />
+	</target>
+
+	<target name="link_buildtool-link_build"
+	        description="Linking to get SAMPLE8.exe"
+	        depends="link_buildtool-init,init,link_buildtool-check_SAMPLE8.exe"
+	        unless="link_buildtool-SAMPLE8.exe_uptodate">
+		<exec dir="."
+		      executable="${link_buildtool-Linker}"
+		      failonerror="${foe}">
+			<arg line="/LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\ucrt\x86\&quot; /LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\um\x86\&quot; /OUT:&quot;SAMPLE8.exe&quot; ${link_buildtool-LinkerOptions} ${link_buildtool-LinkerLibraryOptions} ${link_buildtool-LinkerDllEntryOptions} &quot;Sample8.OBJ&quot;  &quot;${NETCOBOL}\F3BICIMP.LIB&quot; &quot;C:\Program Files (x86)\NetCOBOL\msvcrt.lib&quot; &quot;C:\Program Files (x86)\Windows Kits\10\lib\10.0.15063.0\um\x86\KERNEL32.LIB&quot;" />
+		</exec>
+	</target>
+
+	<target name="link_buildtool-check_SAMPLE8.exe"
+	        description="Checking whether SAMPLE8.exe is up to date">
+		<uptodate property="link_buildtool-SAMPLE8.exe_uptodate">
+			<srcfiles dir="." casesensitive="false">
+				<patternset>
+					<include name="Sample8.OBJ" />
+				</patternset>
+			</srcfiles>
+			<mapper type="merge" to="${project_location}\SAMPLE8.exe" />
+		</uptodate>
+	</target>
+	<target name="link_buildtool-link_rebuild">
+		<antcall target="link_buildtool-clean" />
+		<antcall target="link_buildtool-link_build" />
+	</target>
+
+	<target name="link_buildtool-clean"
+	        description="Cleaning all the linker targets"
+	        depends="link_buildtool-init,init">
+		<delete file="SAMPLE8.exe" />
+		<delete file="SAMPLE8.exe.in2" />
+		<delete file="SAMPLE8.exp" />
+		<delete file="SAMPLE8.lib" />
+		<delete file="SAMPLE8.ilk" />
+		<delete file="SAMPLE8.pdb" />
+
+	</target>
+
+	<target name="incremental_build"
+	        depends="cobol_buildtool-cobol_compile_build,link_buildtool-link_build" />
+
+	<target name="clean_build"
+	        depends="cobol_buildtool-clean,link_buildtool-clean" />
+</project>

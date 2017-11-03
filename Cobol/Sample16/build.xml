@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Sample16" default="incremental_build" basedir=".">
+	<fail unless="eclipse.running"
+	      message="このAntスクリプトはCOBOLビルダが内部的に利用するためのものであり、直接実行することはできません。" />
+	<property name="project.name" value="${ant.project.name}" />
+	<property name="foe" value="true" />
+	<eclipse.convertPath property="workspace_location" resourcepath="/" />
+	<eclipse.convertPath property="project_location"
+	                     resourcepath="/${project.name}" />
+	<property name="apdesigner.build.version" value="3.0.1" />
+	<property name="NETCOBOL" value="C:\Program Files (x86)\NetCOBOL" />
+
+	<target name="init">
+	</target>
+
+	<target name="cobol_buildtool-init"
+	        description="プロパティの初期化中"
+	        unless="cobol_buildtool-initialized">
+		<property name="cobol_buildtool-initialized" value="" />
+
+		<property name="cobol_buildtool-NAMECompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),NAME&quot; " />
+		<property name="cobol_buildtool-CompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR)&quot; " />
+		<property name="cobol_buildtool-CompilerOptionsOfMain"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR)&quot; " />
+		<property name="cobol_buildtool-RepCompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),CREATE(REP)&quot; " />
+		<property name="cobol_buildtool-CompilerOtherOptions" value="" />
+		<property name="cobol_buildtool-CobolCompiler" value="cobol32" />
+		<property name="cobol_buildtool-SourceFile" value="" />
+		<property name="cobol_buildtool-SourceReferenceFormat"
+		          value="SRF(VAR,VAR)" />
+		<property name="cobol_buildtool-UTF8Options" value="" />
+	</target>
+	<taskdef name="IAPWUptodate"
+	         classname="com.fujitsu.cbdt.build.taskdefs.IAPWUptodate" />
+
+	<target name="cobol_buildtool-compile_D_Node.OBJ"
+	        description="ソースファイルの翻訳 D_Node.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_D_Node.OBJ"
+	        if="cobol_buildtool-D_Node.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;D_Node.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_D_Node.OBJ"
+	        description="D_Node.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-D_Node.OBJ_uptodate"
+		              file="D_Node.cob"
+		              outputFiles="D_Node.OBJ"
+		              dependentFiles="" />
+	</target>
+	<target name="cobol_buildtool-fail_for_D_Node.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-D_Node.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: D_Node.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_L_Node.OBJ"
+	        description="ソースファイルの翻訳 L_Node.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_L_Node.OBJ"
+	        if="cobol_buildtool-L_Node.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;L_Node.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_L_Node.OBJ"
+	        description="L_Node.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-L_Node.OBJ_uptodate"
+		              file="L_Node.cob"
+		              outputFiles="L_Node.OBJ"
+		              dependentFiles="" />
+	</target>
+	<target name="cobol_buildtool-fail_for_L_Node.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-L_Node.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: L_Node.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Bin_Tree.OBJ"
+	        description="ソースファイルの翻訳 Bin_Tree.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Bin_Tree.OBJ"
+	        if="cobol_buildtool-Bin_Tree.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Bin_Tree.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Bin_Tree.OBJ"
+	        description="Bin_Tree.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Bin_Tree.OBJ_uptodate"
+		              file="Bin_Tree.cob"
+		              outputFiles="Bin_Tree.OBJ"
+		              dependentFiles="C:\workspace\Sample16\DICTIONARYNODE-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Bin_Tree.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Bin_Tree.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Bin_Tree.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Collect.OBJ"
+	        description="ソースファイルの翻訳 Collect.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Collect.OBJ"
+	        if="cobol_buildtool-Collect.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Collect.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Collect.OBJ"
+	        description="Collect.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Collect.OBJ_uptodate"
+		              file="Collect.cob"
+		              outputFiles="Collect.OBJ"
+		              dependentFiles="C:\workspace\Sample16\BINARYTREE-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Collect.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Collect.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Collect.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_List.OBJ"
+	        description="ソースファイルの翻訳 List.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_List.OBJ"
+	        if="cobol_buildtool-List.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;List.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_List.OBJ"
+	        description="List.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-List.OBJ_uptodate"
+		              file="List.cob"
+		              outputFiles="List.OBJ"
+		              dependentFiles="C:\workspace\Sample16\COLLECT.rep;C:\workspace\Sample16\LISTNODE-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_List.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-List.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: List.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Dict.OBJ"
+	        description="ソースファイルの翻訳 Dict.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Dict.OBJ"
+	        if="cobol_buildtool-Dict.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Dict.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Dict.OBJ"
+	        description="Dict.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Dict.OBJ_uptodate"
+		              file="Dict.cob"
+		              outputFiles="Dict.OBJ"
+		              dependentFiles="C:\workspace\Sample16\BINARYTREE-CLASS.rep;C:\workspace\Sample16\COLLECT.rep;C:\workspace\Sample16\DICTIONARYNODE-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Dict.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Dict.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Dict.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-FileCompile"
+	        description="ソースファイルの翻訳"
+	        depends="cobol_buildtool-init,init">
+		<exec dir="."
+		      executable="${cobol_buildtool-CobolCompiler}"
+		      failonerror="${foe}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions} ${cobol_buildtool-MainFileOption} ${cobol_buildtool-UTF8Options} &quot;${cobol_buildtool-SourceFile}&quot;" />
+		</exec>
+	</target>
+
+	<target name="link_buildtool-init"
+	        description="リンカのプロパティを初期化します。"
+	        unless="link_buildtool-initialized">
+		<property name="link_buildtool-initialized" value="" />
+		<property name="link_buildtool-LinkerOptions"
+		          value=" /DEBUG /DYNAMICBASE:NO " />
+		<property name="link_buildtool-LinkerLibraryOptions" value="" />
+		<property name="link_buildtool-LinkerDllEntryOptions" value="" />
+		<property name="link_buildtool-Linker" value="link" />
+	</target>
+
+	<target name="link_buildtool-link_build"
+	        description="COLLECT.dllの取得先にリンクします。"
+	        depends="link_buildtool-init,init,link_buildtool-check_COLLECT.dll"
+	        unless="link_buildtool-COLLECT.dll_uptodate">
+		<exec dir="."
+		      executable="${link_buildtool-Linker}"
+		      failonerror="${foe}">
+			<arg line="/LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86\&quot; /OUT:&quot;COLLECT.dll&quot; ${link_buildtool-LinkerOptions} ${link_buildtool-LinkerLibraryOptions} ${link_buildtool-LinkerDllEntryOptions}  /DLL &quot;D_Node.OBJ&quot; &quot;Collect.OBJ&quot; &quot;Bin_Tree.OBJ&quot; &quot;List.OBJ&quot; &quot;Dict.OBJ&quot; &quot;L_Node.OBJ&quot;  &quot;${NETCOBOL}\F3BICIMP.LIB&quot; &quot;/NOENTRY&quot; &quot;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86\KERNEL32.LIB&quot;" />
+		</exec>
+	</target>
+
+	<target name="link_buildtool-check_COLLECT.dll"
+	        description="COLLECT.dllが最新のファイルであるか調査中">
+		<uptodate property="link_buildtool-COLLECT.dll_uptodate">
+			<srcfiles dir=".">
+				<patternset>
+					<include name="D_Node.OBJ" />
+					<include name="Collect.OBJ" />
+					<include name="Bin_Tree.OBJ" />
+					<include name="List.OBJ" />
+					<include name="Dict.OBJ" />
+					<include name="L_Node.OBJ" />
+				</patternset>
+			</srcfiles>
+			<mapper type="merge" to="${project_location}\COLLECT.dll" />
+		</uptodate>
+	</target>
+	<target name="link_buildtool-link_rebuild">
+		<antcall target="link_buildtool-clean" />
+		<antcall target="link_buildtool-link_build" />
+	</target>
+
+	<target name="link_buildtool-clean"
+	        description="リンカのターゲットをすべてクリアします。"
+	        depends="link_buildtool-init,init">
+		<delete file="COLLECT.dll" />
+		<delete file="COLLECT.dll.in2" />
+		<delete file="COLLECT.exp" />
+		<delete file="COLLECT.lib" />
+
+	</target>
+
+	<target name="incremental_build"
+	        depends="cobol_buildtool-cobol_compile_build,link_buildtool-link_build" />
+
+	<target name="clean_build"
+	        depends="cobol_buildtool-clean,link_buildtool-clean" />
+</project>

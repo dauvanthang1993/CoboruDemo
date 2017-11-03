@@ -1,0 +1,198 @@
+<HTML>
+<HEAD>
+<TITLE>カタログ</TITLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+function calall(f) {
+  calculate(f, "ProductNumber01", "price01", 408000);
+  calculate(f, "ProductNumber02", "price02", 348000);
+  calculate(f, "ProductNumber03", "price03", 378000);
+  calculate(f, "ProductNumber04", "price04", 318000);
+  calculate(f, "ProductNumber05", "price05", 258000);
+  calculate(f, "ProductNumber06", "price06", 218000);
+}
+
+function clearall(f) {
+  f.elements["num01"].value = 0;
+  f.elements["num02"].value = 0;
+  f.elements["num03"].value = 0;
+  f.elements["num04"].value = 0;
+  f.elements["num05"].value = 0;
+  f.elements["num06"].value = 0;
+}
+
+function calculate(f, modelName, priceName, basePrice) {
+  var price = basePrice;
+
+  if (f.elements[modelName].selectedIndex == 0) {
+    price = price + 20000;
+  }
+
+  f.elements[priceName].value = price;
+}
+
+function checkInt(f, num_name) {
+  var number = f.elements[num_name].value;
+
+
+  if (number.search(/\D/) != -1) {
+    f.elements[num_name].value = 0;
+  }
+}
+
+function numCheck(f) {
+  if (f.elements["num01"].value == 0 &&
+      f.elements["num02"].value == 0 &&
+      f.elements["num03"].value == 0 &&
+      f.elements["num04"].value == 0 &&
+      f.elements["num05"].value == 0 &&
+      f.elements["num06"].value == 0) {
+    alert("全ての数量が0なので、オーダー出来ません");
+    return false;
+  } else {
+    return true;
+  }
+}
+</SCRIPT>
+</HEAD>
+
+<BODY onLoad="calall(document.orderform)">
+<IMG SRC="CatalogTitle.gif" ALT=タイトル">
+<IMG SRC="fjlogo.gif" ALT="ロゴ">
+<FORM NAME="orderform" METHOD="GET"
+ ACTION="confirm.dll"
+ onSubmit="return numCheck(document.orderform)">
+<HR>
+  <TABLE BORDER=1 CELLPADDING=7>
+  <TR>
+    <TH>製品名</TH>
+    <TH>スペック</TH>
+    <TH>モデル</TH>
+    <TH>単価(円)</TH>
+    <TH>数量</TH>
+  </TR>
+  <TR>
+    <TD>
+    <FONT SIZE=2><A HREF="FMV-6450TX2.jpg" TARGET=_top>FMV-6450TX2</A></FONT>
+    </TD>
+    <TD><FONT SIZE=1>Pentium-II 450MHz,64MB,4.3GB,Viper V550,100BASE-TX</FONT></TD>
+    <TD>
+      <SELECT NAME="ProductNumber01"
+       onChange="calculate(this.form, 'ProductNumber01', 'price01', 408000)">
+        <OPTION SELECTED VALUE="FMV2TXH111">WindowsNTモデル
+        <OPTION VALUE="FMV2TXH161">Windows98モデル
+        <OPTION VALUE="FMV2TXH151">Windows95モデル
+      </SELECT>
+    </TD>
+    <TD><INPUT ALIGN=right SIZE=7 MAXLENGTH=7 TYPE="TEXT"
+         NAME="price01" onFocus="this.blur()"></TD>
+    <TD><INPUT TYPE=TEXT SIZE=3 MAXLENGTH=3 NAME="num01" VALUE=0 ALIGN=right
+         onBlur="checkInt(this.form, 'num01')"
+         onChange="checkInt(this.form, 'num01')"></TD>
+  </TR>
+  <TR>
+    <TD>
+    <FONT SIZE=2><A HREF="FMV-6450TX2.jpg" TARGET=_top>FMV-6400TX2</A></FONT>
+    </TD>
+    <TD><FONT SIZE=1>Pentium-II 400MHz,64MB,4.3GB,Viper V550,100BASE-TX</FONT></TD>
+    <TD>
+      <SELECT NAME="ProductNumber02"
+       onChange="calculate(this.form, 'ProductNumber02', 'price02', 348000)">
+        <OPTION SELECTED VALUE="FMV2TXF111">WindowsNTモデル
+        <OPTION VALUE="FMV2TXF161">Windows98モデル
+        <OPTION VALUE="FMV2TXF151">Windows95モデル
+      </SELECT>
+    </TD>
+    <TD><INPUT ALIGN=right SIZE=7 MAXLENGTH=7 TYPE="TEXT"
+         NAME="price02" onFocus="this.blur()"></TD>
+    <TD><INPUT TYPE=TEXT SIZE=3 MAXLENGTH=3 NAME="num02" VALUE=0 ALIGN=right
+         onBlur="checkInt(this.form, 'num02')"
+         onChange="checkInt(this.form, 'num02')"></TD>
+  </TR>
+  <TR>
+    <TD>
+    <FONT SIZE=2><A HREF="FMV-6450DX2.jpg" TARGET=_top>FMV-6450DX2</A></FONT>
+    </TD>
+    <TD><FONT SIZE=1>Pentium-II 450MHz,32MB,4.3GB,RAGE PRO TURBO,サウンド,100BASE-TX</FONT></TD>
+    <TD>
+      <SELECT NAME="ProductNumber03"
+       onChange="calculate(this.form, 'ProductNumber03', 'price03', 378000)">
+        <OPTION SELECTED VALUE="FMV2DXH111">WindowsNTモデル
+        <OPTION VALUE="FMV2DXH161">Windows98モデル
+        <OPTION VALUE="FMV2DXH151">Windows95モデル
+      </SELECT>
+    </TD>
+    <TD><INPUT ALIGN=right SIZE=7 MAXLENGTH=7 TYPE="TEXT"
+         NAME="price03" onFocus="this.blur()"></TD>
+    <TD><INPUT TYPE=TEXT SIZE=3 MAXLENGTH=3 NAME="num03" VALUE=0 ALIGN=right
+         onBlur="checkInt(this.form, 'num03')"
+         onChange="checkInt(this.form, 'num03')"></TD>
+  </TR>
+  <TR>
+    <TD>
+    <FONT SIZE=2><A HREF="FMV-6450DX2.jpg" TARGET=_top>FMV-6400DX2</A></FONT>
+    </TD>
+    <TD><FONT SIZE=1>Pentium-II 400MHz,32MB,4.3GB,RAGE PRO TURBO,サウンド,100BASE-TX</FONT></TD>
+    <TD>
+      <SELECT NAME="ProductNumber04"
+       onChange="calculate(this.form, 'ProductNumber04', 'price04', 318000)">
+        <OPTION SELECTED VALUE="FMV2DXF111">WindowsNTモデル
+        <OPTION VALUE="FMV2DXF161">Windows98モデル
+        <OPTION VALUE="FMV2DXF151">Windows95モデル
+      </SELECT>
+    </TD>
+    <TD><INPUT ALIGN=right SIZE=7 MAXLENGTH=7 TYPE="TEXT"
+         NAME="price04" onFocus="this.blur()"></TD>
+    <TD><INPUT TYPE=TEXT SIZE=3 MAXLENGTH=3 NAME="num04" VALUE=0 ALIGN=right
+         onBlur="checkInt(this.form, 'num04')"
+         onChange="checkInt(this.form, 'num04')"></TD>
+  </TR>
+  <TR>
+    <TD>
+    <FONT SIZE=2><A HREF="FMV-6450DX2.jpg" TARGET=_top>FMV-6350DX2</A></FONT>
+    </TD>
+    <TD><FONT SIZE=1>Pentium-II 350MHz,32MB,4.3GB,RAGE PRO TURBO,サウンド,100BASE-TX</FONT></TD>
+    <TD>
+      <SELECT NAME="ProductNumber05"
+       onChange="calculate(this.form, 'ProductNumber05', 'price05', 258000)">
+        <OPTION SELECTED VALUE="FMV2DXD111">WindowsNTモデル
+        <OPTION VALUE="FMV2DXD161">Windows98モデル
+        <OPTION VALUE="FMV2DXD151">Windows95モデル
+      </SELECT>
+    </TD>
+    <TD><INPUT ALIGN=right SIZE=7 MAXLENGTH=7 TYPE="TEXT"
+         NAME="price05" onFocus="this.blur()"></TD>
+    <TD><INPUT TYPE=TEXT SIZE=3 MAXLENGTH=3 NAME="num05" VALUE=0 ALIGN=right
+         onBlur="checkInt(this.form, 'num05')"
+         onChange="checkInt(this.form, 'num05')"></TD>
+  </TR>
+  <TR>
+    <TD>
+    <FONT SIZE=2><A HREF="FMV-6450DX2.jpg" TARGET=_top>FMV-6366DX2c</A></FONT>
+    </TD>
+    <TD><FONT SIZE=1>Celeron 366MHz,32MB,4.3GB,RAGE PRO TURBO,サウンド,100BASE-TX</FONT></TD>
+    <TD>
+      <SELECT NAME="ProductNumber06"
+       onChange="calculate(this.form, 'ProductNumber06', 'price06', 218000)">
+        <OPTION SELECTED VALUE="FMV2DXA111">WindowsNTモデル
+        <OPTION VALUE="FMV2DXA161">Windows98モデル
+        <OPTION VALUE="FMV2DXA151">Windows95モデル
+      </SELECT>
+    </TD>
+    <TD><INPUT ALIGN=right SIZE=7 MAXLENGTH=7 TYPE="TEXT"
+         NAME="price06" onFocus="this.blur()"></TD>
+    <TD><INPUT TYPE=TEXT SIZE=3 MAXLENGTH=3 NAME="num06" VALUE=0 ALIGN=right
+         onBlur="checkInt(this.form, 'num06')"
+         onChange="checkInt(this.form, 'num06')"></TD>
+  </TR>
+  </TABLE>
+<HR>
+<CENTER>
+<INPUT TYPE="SUBMIT" NAME="OK" VALUE="オーダー">
+<INPUT TYPE="BUTTON" VALUE="クリア" onClick="clearall(this.form)">
+
+<INPUT TYPE="BUTTON" VALUE="メニューに戻る" onClick="location.href='ShoppingMenu.html'"><P>
+</CENTER>
+</FORM>
+</BODY>
+</HTML>

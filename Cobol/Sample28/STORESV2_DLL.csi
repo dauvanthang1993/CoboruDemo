@@ -1,0 +1,38 @@
+[Component]
+Csi Version=1.0
+Project Name=STORESV2.PRJ
+Server Name=STORESV2.DLL
+Server Version=1.0
+Description=
+Compatible=2
+coclassnum=2
+classnum=2
+[GUID]
+typelibid=9A65EB70-D497-11D3-BEA6-00000E5F3FED
+coclass_1=9A65EB71-D497-11D3-BEA6-00000E5F3FED
+f_coclass_1=9A65EB72-D497-11D3-BEA6-00000E5F3FED
+disp_coclass_1=9A65EB73-D497-11D3-BEA6-00000E5F3FED
+coclass_2=9A65EB74-D497-11D3-BEA6-00000E5F3FED
+f_coclass_2=9A65EB75-D497-11D3-BEA6-00000E5F3FED
+disp_coclass_2=9A65EB76-D497-11D3-BEA6-00000E5F3FED
+
+
+[Class Name]
+coclass_1=ONLINE_STORE
+f_coclass_1=FACTORY_ONLINE_STORE
+disp_coclass_1=_ONLINE_STORE
+coclass_2=DB_ACCESS
+f_coclass_2=FACTORY_DB_ACCESS
+disp_coclass_2=_DB_ACCESS
+[Rep Files]
+coclass_1=ONLINE_STORE.REP
+coclass_2=DB_ACCESS.REP
+[Source Files]
+coclass_1=Online_Store.cob
+coclass_2=DB_ACCESS.cob
+[Class Version]
+coclass_1=1.0
+coclass_2=1.0
+[Class Description]
+coclass_1=
+coclass_2=

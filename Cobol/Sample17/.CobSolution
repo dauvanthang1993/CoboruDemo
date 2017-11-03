@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solution name="Sample17">
+	<comment></comment>
+	<project name="SAMPLE17_EXE">
+	</project>
+	<project name="SAMPLE17_DLL">
+	</project>
+	<project name="SAMPLE17_LIB">
+	</project>
+</solution>

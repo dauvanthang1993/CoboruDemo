@@ -1,0 +1,5 @@
+@CBR_SAF_LOGFILE=C:\etc\saf.log
+@CBR_SAF_SEVERITY=0
+@ShowIcon=NO
+@NoMessage=YES
+@MessOutFile=C:\etc\SAFSMPL1.txt

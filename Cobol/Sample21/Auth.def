@@ -1,0 +1,6 @@
+LIBRARY Auth 
+EXPORTS 
+    GetExtensionVersion 
+    HttpExtensionProc 
+    TerminateExtension 
+

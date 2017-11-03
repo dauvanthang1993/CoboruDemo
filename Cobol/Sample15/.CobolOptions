@@ -1,0 +1,36 @@
+[Encoding]
+Encoding=UTF8
+
+[Apdesigner Version Information]
+Version No=6.0
+
+[CobolProject]
+Edition=6.000
+
+[SolutionOptionsUsing]
+ProjectCompilerOptionsCheck=on
+ProjectBuildToolResourceCheck=on
+ProjectRemoteTargetOptionsCheck=off
+ProjectBuildToolPreCompilerCheck=on
+ProjectBuildToolIDLPreCompilerCheck=off
+
+[CobolCompilerOptions]
+TAB=TAB(4)
+SRF=SRF(VAR,VAR)
+MAIN=MAIN(WINMAIN)
+D-CHECK=CHECK(ALL)
+ForceCheckAllInDebugMode=true
+
+[TargetOptions]
+TargetName=MAIN
+ApplicationArch=x86
+TargetType=EXE
+BuildMode=Debug
+DLLUseCBR=false
+
+[DependencyViewSourceFiles]
+CobolSourceFileCount=3
+CobolSourceFile3=Address.cob
+CobolSourceFile2=Member.cob
+CobolSourceFile1=Main.cob
+MainFile=Sample15/Main.cob

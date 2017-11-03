@@ -1,0 +1,4 @@
+[Compile Options]
+ALPHAL=Yes WORD
+LIB="C:\COBOL";"C:\COBOL\SAMPLES\COBOL\wsession"
+THREAD=MULTI

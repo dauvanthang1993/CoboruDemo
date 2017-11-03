@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Sample17_EXE" default="incremental_build" basedir=".">
+	<fail unless="eclipse.running"
+	      message="このAntスクリプトはCOBOLビルダが内部的に利用するためのものであり、直接実行することはできません。" />
+	<property name="project.name" value="${ant.project.name}" />
+	<property name="foe" value="true" />
+	<eclipse.convertPath property="workspace_location" resourcepath="/" />
+	<eclipse.convertPath property="project_location"
+	                     resourcepath="/${project.name}" />
+	<property name="apdesigner.build.version" value="3.0.1" />
+	<property name="NETCOBOL" value="C:\Program Files (x86)\NetCOBOL" />
+
+	<target name="init">
+	</target>
+
+	<target name="cobol_buildtool-init"
+	        description="プロパティの初期化中"
+	        unless="cobol_buildtool-initialized">
+		<property name="cobol_buildtool-initialized" value="" />
+		<property name="project_location_SAMPLE17_LIB"
+		          value="${workspace_location}\SAMPLE17_LIB" />
+		<property name="project_location_SAMPLE16"
+		          value="${workspace_location}\SAMPLE16" />
+		<property name="project_location_SAMPLE17_DLL"
+		          value="${workspace_location}\SAMPLE17_DLL" />
+
+		<property name="cobol_buildtool-NAMECompilerOptions"
+		          value="  -I &quot;${project_location_SAMPLE17_LIB}&quot; -R &quot;${project_location_SAMPLE16}&quot; -R &quot;${project_location_SAMPLE17_DLL}&quot; -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),NAME&quot; " />
+		<property name="cobol_buildtool-CompilerOptions"
+		          value="  -I &quot;${project_location_SAMPLE17_LIB}&quot; -R &quot;${project_location_SAMPLE16}&quot; -R &quot;${project_location_SAMPLE17_DLL}&quot; -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR)&quot; " />
+		<property name="cobol_buildtool-CompilerOptionsOfMain"
+		          value="  -I &quot;${project_location_SAMPLE17_LIB}&quot; -R &quot;${project_location_SAMPLE16}&quot; -R &quot;${project_location_SAMPLE17_DLL}&quot; -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),MAIN(WINMAIN)&quot; " />
+		<property name="cobol_buildtool-RepCompilerOptions"
+		          value="  -I &quot;${project_location_SAMPLE17_LIB}&quot; -R &quot;${project_location_SAMPLE16}&quot; -R &quot;${project_location_SAMPLE17_DLL}&quot; -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),CREATE(REP)&quot; " />
+		<property name="cobol_buildtool-CompilerOtherOptions" value="" />
+		<property name="cobol_buildtool-CobolCompiler" value="cobol32" />
+		<property name="cobol_buildtool-SourceFile" value="" />
+		<property name="cobol_buildtool-SourceReferenceFormat"
+		          value="SRF(VAR,VAR)" />
+		<property name="cobol_buildtool-UTF8Options" value="" />
+	</target>
+	<taskdef name="IAPWUptodate"
+	         classname="com.fujitsu.cbdt.build.taskdefs.IAPWUptodate" />
+
+	<target name="cobol_buildtool-compile_Reserve.OBJ"
+	        description="ソースファイルの翻訳 Reserve.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Reserve.OBJ"
+	        if="cobol_buildtool-Reserve.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Reserve.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Reserve.OBJ"
+	        description="Reserve.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Reserve.OBJ_uptodate"
+		              file="Reserve.cob"
+		              outputFiles="Reserve.OBJ"
+		              dependentFiles="C:\workspace\Sample17_EXE\LIST.rep;C:\workspace\Sample17_EXE\R_CONST.cbl;C:\workspace\Sample17_EXE\RSVINFO.cbl;C:\workspace\Sample17_EXE\エラークラス.rep;C:\workspace\Sample17_EXE\リストイテレータ.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Reserve.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Reserve.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Reserve.cob または依存ファイル, C:\workspace\Sample17_EXE\R_CONST.cbl, C:\workspace\Sample17_EXE\RSVINFO.cbl " />
+	</target>
+
+	<target name="cobol_buildtool-compile_RoomSpec.OBJ"
+	        description="ソースファイルの翻訳 RoomSpec.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_RoomSpec.OBJ"
+	        if="cobol_buildtool-RoomSpec.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;RoomSpec.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_RoomSpec.OBJ"
+	        description="RoomSpec.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-RoomSpec.OBJ_uptodate"
+		              file="RoomSpec.cob"
+		              outputFiles="RoomSpec.OBJ"
+		              dependentFiles="C:\workspace\Sample17_EXE\仕様クラス.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_RoomSpec.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-RoomSpec.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: RoomSpec.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_TimeSta.OBJ"
+	        description="ソースファイルの翻訳 TimeSta.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_TimeSta.OBJ"
+	        if="cobol_buildtool-TimeSta.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;TimeSta.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_TimeSta.OBJ"
+	        description="TimeSta.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-TimeSta.OBJ_uptodate"
+		              file="TimeSta.cob"
+		              outputFiles="TimeSta.OBJ"
+		              dependentFiles="C:\workspace\Sample17_EXE\R_CONST.cbl;C:\workspace\Sample17_EXE\RSVINFO.cbl;C:\workspace\Sample17_EXE\予約情報クラス.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_TimeSta.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-TimeSta.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: TimeSta.cob または依存ファイル, C:\workspace\Sample17_EXE\R_CONST.cbl, C:\workspace\Sample17_EXE\RSVINFO.cbl " />
+	</target>
+
+	<target name="cobol_buildtool-compile_RoomCtrl.OBJ"
+	        description="ソースファイルの翻訳 RoomCtrl.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_RoomCtrl.OBJ"
+	        if="cobol_buildtool-RoomCtrl.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;RoomCtrl.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_RoomCtrl.OBJ"
+	        description="RoomCtrl.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-RoomCtrl.OBJ_uptodate"
+		              file="RoomCtrl.cob"
+		              outputFiles="RoomCtrl.OBJ"
+		              dependentFiles="C:\workspace\Sample17_EXE\LIST.rep;C:\workspace\Sample17_EXE\R_CONST.cbl;C:\workspace\Sample17_EXE\ROOMINFO.cbl;C:\workspace\Sample17_EXE\エラークラス.rep;C:\workspace\Sample17_EXE\シングルトン.rep;C:\workspace\Sample17_EXE\リストイテレータ.rep;C:\workspace\Sample17_EXE\会議室情報クラス.rep;C:\workspace\Sample17_EXE\仕様管理クラス.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_RoomCtrl.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-RoomCtrl.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: RoomCtrl.cob または依存ファイル, C:\workspace\Sample17_EXE\R_CONST.cbl, C:\workspace\Sample17_EXE\ROOMINFO.cbl " />
+	</target>
+
+	<target name="cobol_buildtool-compile_RoomSta.OBJ"
+	        description="ソースファイルの翻訳 RoomSta.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_RoomSta.OBJ"
+	        if="cobol_buildtool-RoomSta.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;RoomSta.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_RoomSta.OBJ"
+	        description="RoomSta.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-RoomSta.OBJ_uptodate"
+		              file="RoomSta.cob"
+		              outputFiles="RoomSta.OBJ"
+		              dependentFiles="C:\workspace\Sample17_EXE\LIST.rep;C:\workspace\Sample17_EXE\R_CONST.cbl;C:\workspace\Sample17_EXE\ROOMINFO.cbl;C:\workspace\Sample17_EXE\RSVINFO.cbl;C:\workspace\Sample17_EXE\エラークラス.rep;C:\workspace\Sample17_EXE\リストイテレータ.rep;C:\workspace\Sample17_EXE\会議室情報クラス.rep;C:\workspace\Sample17_EXE\会議室情報管理クラス.rep;C:\workspace\Sample17_EXE\予約状態－時間枠クラス.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_RoomSta.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-RoomSta.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: RoomSta.cob または依存ファイル, C:\workspace\Sample17_EXE\R_CONST.cbl, C:\workspace\Sample17_EXE\ROOMINFO.cbl, C:\workspace\Sample17_EXE\RSVINFO.cbl " />
+	</target>
+
+	<target name="cobol_buildtool-compile_DateSta.OBJ"
+	        description="ソースファイルの翻訳 DateSta.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_DateSta.OBJ"
+	        if="cobol_buildtool-DateSta.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;DateSta.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_DateSta.OBJ"
+	        description="DateSta.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-DateSta.OBJ_uptodate"
+		              file="DateSta.cob"
+		              outputFiles="DateSta.OBJ"
+		              dependentFiles="C:\workspace\Sample17_EXE\DICT.rep;C:\workspace\Sample17_EXE\LIST.rep;C:\workspace\Sample17_EXE\R_CONST.cbl;C:\workspace\Sample17_EXE\ROOMINFO.cbl;C:\workspace\Sample17_EXE\RSVINFO.cbl;C:\workspace\Sample17_EXE\エラークラス.rep;C:\workspace\Sample17_EXE\予約状態－会議室クラス.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_DateSta.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-DateSta.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: DateSta.cob または依存ファイル, C:\workspace\Sample17_EXE\R_CONST.cbl, C:\workspace\Sample17_EXE\ROOMINFO.cbl, C:\workspace\Sample17_EXE\RSVINFO.cbl " />
+	</target>
+
+	<target name="cobol_buildtool-compile_RsvCtrl.OBJ"
+	        description="ソースファイルの翻訳 RsvCtrl.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_RsvCtrl.OBJ"
+	        if="cobol_buildtool-RsvCtrl.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;RsvCtrl.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_RsvCtrl.OBJ"
+	        description="RsvCtrl.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-RsvCtrl.OBJ_uptodate"
+		              file="RsvCtrl.cob"
+		              outputFiles="RsvCtrl.OBJ"
+		              dependentFiles="C:\workspace\Sample17_EXE\LIST.rep;C:\workspace\Sample17_EXE\R_CONST.cbl;C:\workspace\Sample17_EXE\ROOMINFO.cbl;C:\workspace\Sample17_EXE\RSVINFO.cbl;C:\workspace\Sample17_EXE\エラークラス.rep;C:\workspace\Sample17_EXE\シングルトン.rep;C:\workspace\Sample17_EXE\リストイテレータ.rep;C:\workspace\Sample17_EXE\予約情報クラス.rep;C:\workspace\Sample17_EXE\予約状態－会議室クラス.rep;C:\workspace\Sample17_EXE\予約状態－日付クラス.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_RsvCtrl.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-RsvCtrl.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: RsvCtrl.cob または依存ファイル, C:\workspace\Sample17_EXE\R_CONST.cbl, C:\workspace\Sample17_EXE\ROOMINFO.cbl, C:\workspace\Sample17_EXE\RSVINFO.cbl " />
+	</target>
+
+	<target name="cobol_buildtool-compile_ExcelEdt.OBJ"
+	        description="ソースファイルの翻訳 ExcelEdt.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_ExcelEdt.OBJ"
+	        if="cobol_buildtool-ExcelEdt.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;ExcelEdt.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_ExcelEdt.OBJ"
+	        description="ExcelEdt.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-ExcelEdt.OBJ_uptodate"
+		              file="ExcelEdt.cob"
+		              outputFiles="ExcelEdt.OBJ"
+		              dependentFiles="C:\workspace\Sample17_EXE\LIST.rep;C:\workspace\Sample17_EXE\R_CONST.cbl;C:\workspace\Sample17_EXE\ROOMINFO.cbl;C:\workspace\Sample17_EXE\RSVINFO.cbl;C:\workspace\Sample17_EXE\リストイテレータ.rep;C:\workspace\Sample17_EXE\会議室情報管理クラス.rep;C:\workspace\Sample17_EXE\予約管理クラス.rep;C:\workspace\Sample17_EXE\予約情報クラス.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_ExcelEdt.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-ExcelEdt.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: ExcelEdt.cob または依存ファイル, C:\workspace\Sample17_EXE\R_CONST.cbl, C:\workspace\Sample17_EXE\ROOMINFO.cbl, C:\workspace\Sample17_EXE\RSVINFO.cbl " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Main.OBJ"
+	        description="ソースファイルの翻訳 Main.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Main.OBJ"
+	        if="cobol_buildtool-Main.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptionsOfMain} ${cobol_buildtool-CompilerOtherOptions}  -M  -Dt &quot;Main.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Main.OBJ"
+	        description="Main.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Main.OBJ_uptodate"
+		              file="Main.cob"
+		              outputFiles="Main.OBJ"
+		              dependentFiles="C:\workspace\Sample17_EXE\R_CONST.cbl;C:\workspace\Sample17_EXE\ROOMINFO.cbl;C:\workspace\Sample17_EXE\RSVINFO.cbl;C:\workspace\Sample17_EXE\会議室情報管理クラス.rep;C:\workspace\Sample17_EXE\予約管理クラス.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Main.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Main.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Main.cob または依存ファイル, C:\workspace\Sample17_EXE\R_CONST.cbl, C:\workspace\Sample17_EXE\ROOMINFO.cbl, C:\workspace\Sample17_EXE\RSVINFO.cbl " />
+	</target>
+
+	<target name="cobol_buildtool-FileCompile"
+	        description="ソースファイルの翻訳"
+	        depends="cobol_buildtool-init,init">
+		<exec dir="."
+		      executable="${cobol_buildtool-CobolCompiler}"
+		      failonerror="${foe}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions} ${cobol_buildtool-MainFileOption} ${cobol_buildtool-UTF8Options} &quot;${cobol_buildtool-SourceFile}&quot;" />
+		</exec>
+	</target>
+	<target name="cobol_buildtool-cobol_compile_build">
+
+		<antcall target="cobol_buildtool-compile_Reserve.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_RoomSpec.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_TimeSta.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_RoomCtrl.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_RoomSta.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_DateSta.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_RsvCtrl.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_ExcelEdt.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Main.OBJ" />
+
+	</target>
+	<target name="cobol_buildtool-cobol_compile_rebuild">
+
+		<antcall target="cobol_buildtool-clean" />
+
+		<antcall target="cobol_buildtool-cobol_compile_build" />
+
+	</target>
+	<target name="cobol_buildtool-clean"
+	        description="翻訳ターゲットをすべてクリーン中"
+	        depends="cobol_buildtool-init,init">
+		<delete>
+			<fileset dir="." casesensitive="false">
+				<patternset>
+					<include name="Reserve.SVD" />
+					<include name="RoomSpec.SVD" />
+					<include name="TimeSta.SVD" />
+					<include name="RoomCtrl.SVD" />
+					<include name="RoomSta.SVD" />
+					<include name="DateSta.SVD" />
+					<include name="RsvCtrl.SVD" />
+					<include name="ExcelEdt.SVD" />
+					<include name="Main.SVD" />
+					<include name="予約情報クラス.rep" />
+					<include name="Reserve.OBJ" />
+					<include name="会議室情報クラス.rep" />
+					<include name="RoomSpec.OBJ" />
+					<include name="予約状態－時間枠クラス.rep" />
+					<include name="TimeSta.OBJ" />
+					<include name="会議室情報管理クラス.rep" />
+					<include name="RoomCtrl.OBJ" />
+					<include name="予約状態－会議室クラス.rep" />
+					<include name="RoomSta.OBJ" />
+					<include name="予約状態－日付クラス.rep" />
+					<include name="DateSta.OBJ" />
+					<include name="予約管理クラス.rep" />
+					<include name="RsvCtrl.OBJ" />
+					<include name="ExcelEdt.OBJ" />
+					<include name="Main.OBJ" />
+
+				</patternset>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="link_buildtool-init"
+	        description="リンカのプロパティを初期化します。"
+	        unless="link_buildtool-initialized">
+		<property name="link_buildtool-initialized" value="" />
+		<property name="link_buildtool-LinkerOptions"
+		          value=" /DEBUG /DYNAMICBASE:NO " />
+		<property name="link_buildtool-LinkerLibraryOptions" value="" />
+		<property name="link_buildtool-LinkerDllEntryOptions" value="" />
+		<property name="link_buildtool-Linker" value="link" />
+	</target>
+
+	<target name="link_buildtool-link_build"
+	        description="SAMPLE17.exeの取得先にリンクします。"
+	        depends="link_buildtool-init,init,link_buildtool-check_SAMPLE17.exe"
+	        unless="link_buildtool-SAMPLE17.exe_uptodate">
+		<exec dir="."
+		      executable="${link_buildtool-Linker}"
+		      failonerror="${foe}">
+			<arg line="/LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86\&quot; /OUT:&quot;SAMPLE17.exe&quot; ${link_buildtool-LinkerOptions} ${link_buildtool-LinkerLibraryOptions} ${link_buildtool-LinkerDllEntryOptions} &quot;Reserve.OBJ&quot; &quot;TimeSta.OBJ&quot; &quot;ExcelEdt.OBJ&quot; &quot;Main.OBJ&quot; &quot;RoomCtrl.OBJ&quot; &quot;RoomSpec.OBJ&quot; &quot;RoomSta.OBJ&quot; &quot;RsvCtrl.OBJ&quot; &quot;DateSta.OBJ&quot; &quot;C:\workspace\Sample17_EXE\COLLECT.lib&quot; &quot;C:\workspace\Sample17_EXE\SPECCTRL.lib&quot;  &quot;${NETCOBOL}\F3BICIMP.LIB&quot; &quot;C:\Program Files (x86)\NetCOBOL\LIBCMT.LIB&quot; &quot;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86\KERNEL32.LIB&quot;" />
+		</exec>
+	</target>
+
+	<target name="link_buildtool-check_SAMPLE17.exe"
+	        description="SAMPLE17.exeが最新のファイルであるか調査中">
+		<uptodate property="link_buildtool-SAMPLE17.exe_uptodate">
+			<srcfiles dir=".">
+				<patternset>
+					<include name="Reserve.OBJ" />
+					<include name="TimeSta.OBJ" />
+					<include name="ExcelEdt.OBJ" />
+					<include name="Main.OBJ" />
+					<include name="RoomCtrl.OBJ" />
+					<include name="RoomSpec.OBJ" />
+					<include name="RoomSta.OBJ" />
+					<include name="RsvCtrl.OBJ" />
+					<include name="DateSta.OBJ" />
+				</patternset>
+			</srcfiles>
+			<srcfiles dir="C:\workspace\Sample17_EXE">
+				<patternset>
+					<include name="COLLECT.lib" />
+				</patternset>
+			</srcfiles>
+			<srcfiles dir="C:\workspace\Sample17_EXE">
+				<patternset>
+					<include name="SPECCTRL.lib" />
+				</patternset>
+			</srcfiles>
+			<mapper type="merge" to="${project_location}\SAMPLE17.exe" />
+		</uptodate>
+	</target>
+	<target name="link_buildtool-link_rebuild">
+		<antcall target="link_buildtool-clean" />
+		<antcall target="link_buildtool-link_build" />
+	</target>
+
+	<target name="link_buildtool-clean"
+	        description="リンカのターゲットをすべてクリアします。"
+	        depends="link_buildtool-init,init">
+		<delete file="SAMPLE17.exe" />
+		<delete file="SAMPLE17.exe.in2" />
+		<delete file="SAMPLE17.exp" />
+		<delete file="SAMPLE17.lib" />
+
+	</target>
+
+	<target name="incremental_build"
+	        depends="cobol_buildtool-cobol_compile_build,link_buildtool-link_build" />
+
+	<target name="clean_build"
+	        depends="cobol_buildtool-clean,link_buildtool-clean" />
+</project>

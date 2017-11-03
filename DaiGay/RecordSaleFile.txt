@@ -1,0 +1,8 @@
+1001Apple               A150300
+1002Orange              01004A0
+2001Cocacola            0150200
+2002Sprite              0200100
+2003Milk                0555050
+3001Ao phong xanh duong 0400009
+3002Quan dui hoa        0500030
+3003Ao khoac thu        0999010

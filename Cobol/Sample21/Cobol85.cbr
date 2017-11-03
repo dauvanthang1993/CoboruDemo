@@ -1,0 +1,5 @@
+@CBR_ISAPI_LOGFILE=C:\COBOL\samples\cobol\sample21\ISASMPL.log
+@CBR_ISAPI_SEVERITY=0
+SYS006=C:\COBOL\samples\cobol\sample21\UserInfo
+@ShowIcon=NO
+@CBR_MESSAGE=EVENTLOG

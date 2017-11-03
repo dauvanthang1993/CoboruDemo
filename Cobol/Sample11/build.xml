@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Sample11" default="incremental_build" basedir=".">
+	<fail unless="eclipse.running"
+	      message="このAntスクリプトはCOBOLビルダが内部的に利用するためのものであり、直接実行することはできません。" />
+	<property name="project.name" value="${ant.project.name}" />
+	<property name="foe" value="true" />
+	<eclipse.convertPath property="workspace_location" resourcepath="/" />
+	<eclipse.convertPath property="project_location"
+	                     resourcepath="/${project.name}" />
+	<property name="apdesigner.build.version" value="3.0.1" />
+	<property name="NETCOBOL" value="C:\Program Files (x86)\NetCOBOL" />
+
+	<target name="init">
+	</target>
+
+	<target name="cobol_buildtool-init"
+	        description="プロパティの初期化中"
+	        unless="cobol_buildtool-initialized">
+		<property name="cobol_buildtool-initialized" value="" />
+
+		<property name="cobol_buildtool-NAMECompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),NAME&quot; " />
+		<property name="cobol_buildtool-CompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR)&quot; " />
+		<property name="cobol_buildtool-CompilerOptionsOfMain"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),MAIN(WINMAIN)&quot; " />
+		<property name="cobol_buildtool-RepCompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),CREATE(REP)&quot; " />
+		<property name="cobol_buildtool-CompilerOtherOptions" value="" />
+		<property name="cobol_buildtool-CobolCompiler" value="cobol32" />
+		<property name="cobol_buildtool-SourceFile" value="" />
+		<property name="cobol_buildtool-SourceReferenceFormat"
+		          value="SRF(VAR,VAR)" />
+		<property name="cobol_buildtool-UTF8Options" value="" />
+	</target>
+	<taskdef name="IAPWUptodate"
+	         classname="com.fujitsu.cbdt.build.taskdefs.IAPWUptodate" />
+
+	<target name="cobol_buildtool-compile_Sample11.OBJ"
+	        description="ソースファイルの翻訳 Sample11.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Sample11.OBJ"
+	        if="cobol_buildtool-Sample11.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptionsOfMain} ${cobol_buildtool-CompilerOtherOptions}  -M  -Dt &quot;Sample11.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Sample11.OBJ"
+	        description="Sample11.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Sample11.OBJ_uptodate"
+		              file="Sample11.cob"
+		              outputFiles="Sample11.OBJ"
+		              dependentFiles="" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Sample11.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Sample11.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Sample11.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-FileCompile"
+	        description="ソースファイルの翻訳"
+	        depends="cobol_buildtool-init,init">
+		<exec dir="."
+		      executable="${cobol_buildtool-CobolCompiler}"
+		      failonerror="${foe}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions} ${cobol_buildtool-MainFileOption} ${cobol_buildtool-UTF8Options} &quot;${cobol_buildtool-SourceFile}&quot;" />
+		</exec>
+	</target>
+	<target name="cobol_buildtool-cobol_compile_build">
+
+		<antcall target="cobol_buildtool-compile_Sample11.OBJ" />
+
+	</target>
+	<target name="cobol_buildtool-cobol_compile_rebuild">
+
+		<antcall target="cobol_buildtool-clean" />
+
+		<antcall target="cobol_buildtool-cobol_compile_build" />
+
+	</target>
+	<target name="cobol_buildtool-clean"
+	        description="翻訳ターゲットをすべてクリーン中"
+	        depends="cobol_buildtool-init,init">
+		<delete>
+			<fileset dir="." casesensitive="false">
+				<patternset>
+					<include name="Sample11.SVD" />
+					<include name="Sample11.OBJ" />
+
+				</patternset>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="link_buildtool-init"
+	        description="リンカのプロパティを初期化します。"
+	        unless="link_buildtool-initialized">
+		<property name="link_buildtool-initialized" value="" />
+		<property name="link_buildtool-LinkerOptions"
+		          value=" /DEBUG /DYNAMICBASE:NO " />
+		<property name="link_buildtool-LinkerLibraryOptions" value="" />
+		<property name="link_buildtool-LinkerDllEntryOptions" value="" />
+		<property name="link_buildtool-Linker" value="link" />
+	</target>
+
+	<target name="link_buildtool-link_build"
+	        description="SAMPLE11.exeの取得先にリンクします。"
+	        depends="link_buildtool-init,init,link_buildtool-check_SAMPLE11.exe"
+	        unless="link_buildtool-SAMPLE11.exe_uptodate">
+		<exec dir="."
+		      executable="${link_buildtool-Linker}"
+		      failonerror="${foe}">
+			<arg line="/LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86\&quot; /OUT:&quot;SAMPLE11.exe&quot; ${link_buildtool-LinkerOptions} ${link_buildtool-LinkerLibraryOptions} ${link_buildtool-LinkerDllEntryOptions} &quot;Sample11.OBJ&quot;  &quot;${NETCOBOL}\F3BICIMP.LIB&quot; &quot;C:\Program Files (x86)\NetCOBOL\LIBCMT.LIB&quot; &quot;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86\KERNEL32.LIB&quot;" />
+		</exec>
+	</target>
+
+	<target name="link_buildtool-check_SAMPLE11.exe"
+	        description="SAMPLE11.exeが最新のファイルであるか調査中">
+		<uptodate property="link_buildtool-SAMPLE11.exe_uptodate">
+			<srcfiles dir=".">
+				<patternset>
+					<include name="Sample11.OBJ" />
+				</patternset>
+			</srcfiles>
+			<mapper type="merge" to="${project_location}\SAMPLE11.exe" />
+		</uptodate>
+	</target>
+	<target name="link_buildtool-link_rebuild">
+		<antcall target="link_buildtool-clean" />
+		<antcall target="link_buildtool-link_build" />
+	</target>
+
+	<target name="link_buildtool-clean"
+	        description="リンカのターゲットをすべてクリアします。"
+	        depends="link_buildtool-init,init">
+		<delete file="SAMPLE11.exe" />
+		<delete file="SAMPLE11.exe.in2" />
+		<delete file="SAMPLE11.exp" />
+		<delete file="SAMPLE11.lib" />
+
+	</target>
+
+	<target name="incremental_build"
+	        depends="cobol_buildtool-cobol_compile_build,link_buildtool-link_build" />
+
+	<target name="clean_build"
+	        depends="cobol_buildtool-clean,link_buildtool-clean" />
+</project>

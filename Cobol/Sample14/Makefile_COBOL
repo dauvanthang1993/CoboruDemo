@@ -1,0 +1,41 @@
+###############################################################################
+#                               NetCOBOL
+###############################################################################
+
+COBFLAGS=
+LINKOPTION = 
+
+ALL : K_KEN.DLL 
+
+REBUILD : CLEAN ALL
+CLEAN :
+	DEL "K_SYU.OBJ"
+	DEL "K_NYU.OBJ"
+	DEL "K_SIN.OBJ"
+	DEL "K_KEN.OBJ"
+	DEL "K_KEN.DLL"
+	DEL "K_KEN.exp"
+	DEL "K_KEN.lib"
+
+"K_SYU.OBJ" : "K_SYU.COB" "MAKEFILE_COBOL"
+	COBOL32.EXE -I.\ $(COBFLAGS) "K_SYU.COB"
+
+"K_NYU.OBJ" : "K_NYU.COB" "MAKEFILE_COBOL"
+	COBOL32.EXE -I.\ $(COBFLAGS) "K_NYU.COB"
+
+"K_SIN.OBJ" : "K_SIN.COB" "MAKEFILE_COBOL"
+	COBOL32.EXE -I.\ $(COBFLAGS) "K_SIN.COB"
+
+"K_KEN.OBJ" : "K_KEN.COB" "MAKEFILE_COBOL"
+	COBOL32.EXE -I.\ $(COBFLAGS) "K_KEN.COB"
+
+"K_KEN.DLL" : "K_SYU.OBJ" "K_NYU.OBJ" "K_SIN.OBJ" "K_KEN.OBJ"
+	"LINK.EXE" $(LINKOPTION) \
+	/DLL /OUT:"K_KEN.DLL" \
+	/DYNAMICBASE:NO \
+	/NOENTRY \
+	/DYNAMICBASE:NO \
+	/EXPORT:K_SYU /EXPORT:K_NYU \
+	/EXPORT:K_SIN /EXPORT:K_KEN \
+	"K_SYU.OBJ" "K_NYU.OBJ" "K_SIN.OBJ" "K_KEN.OBJ" \
+	"F3BICIMP.LIB"

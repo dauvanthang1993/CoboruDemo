@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<TITLE>オーダー確認</TITLE>
+</HEAD>
+
+<BODY>
+<H1><FONT COLOR=Blue>オーダー確認</FONT></H1><BR>
+オーダー内容は次の通りです。内容を確認後、「オーダー発行」ボタンを押して下さい。
+オーダーが発行されます。
+<P>
+<FORM METHOD="GET" ACTION="entry.dll">
+<HR>
+  <TABLE BORDER=1 CELLPADDING=7>
+  <TR>
+    <TH>製品名</TH>
+    <TH>モデル</TH>
+    <TH>数量</TH>
+    <TH>金額(千円)</TH>
+  </TR>
+<!-- 確認用オーダー明細用部品 -->
+  <TR>
+    <TD>
+    <INPUT TYPE=HIDDEN NAME="ProductNumber//COBOL//Sequence//COBOL//"
+     VALUE="//COBOL//ProductNumber//COBOL//">
+    <FONT SIZE=2>//COBOL//ProductName//COBOL//</FONT></TD>
+    <TD>//COBOL//ProductModel//COBOL//</TD>
+    <TD ALIGN=right>
+      <INPUT TYPE=TEXT SIZE=10 MAXLEN=10
+       NAME="ProductQuantity//COBOL//Sequence//COBOL//"
+       VALUE="//COBOL//ProductQuantity//COBOL//" onFocus="this.blur()">
+    </TD>
+    <TD ALIGN=right>//COBOL//ProductTotal//COBOL//</TD>
+  </TR>
+  <TR>
+    <TD COLSPAN=2>総計</TD>
+    <TD ALIGN=right>//COBOL//SummaryQuantity//COBOL//</TD>
+    <TD ALIGN=right>//COBOL//SummaryTotal//COBOL//</TD>
+  </TR>
+  </TABLE>
+<HR>
+<INPUT TYPE="SUBMIT" NAME="OK" VALUE="オーダー発行">
+<INPUT TYPE="BUTTON" NAME="CANCEL" VALUE="取消し" onClick="location.href='Catalog.html'">
+</FORM>
+</BODY>
+</HTML>

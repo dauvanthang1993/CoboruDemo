@@ -1,0 +1,32 @@
+<HTML>
+<HEAD>
+<TITLE>会員認証</TITLE>
+</HEAD>
+
+<BODY>
+<H1><FONT COLOR=Blue>会員認証</FONT></H1><BR>
+貴方のIDとパスワードを入力して下さい。
+会員登録がまだの方は、<A HREF="UnderConstruction.html">会員登録</A>を行って下さい。
+
+<!-- SAFアプリに移行する際 ACTION の部分にMIMEタイプの設定時に指定した拡張子を記述する必要があります -->
+<FORM METHOD="POST" ACTION="auth.dll">
+
+<HR>
+  <TABLE BORDER=0 ALIGN=center>
+  <TR>
+    <TD>ユーザID：</TD>
+    <TD><INPUT SIZE=20 MAXLENGTH=20 TYPE="TEXT" NAME="ユーザID"></TD>
+  <TR>
+  </TR>
+    <TD>パスワード：</TD>
+    <TD><INPUT SIZE=20 MAXLENGTH=20 TYPE="PASSWORD" NAME="パスワード"></TD>
+  </TR>
+  </TABLE>
+<HR>
+<CENTER>
+<INPUT TYPE="SUBMIT" NAME="OK" VALUE="ＯＫ">
+<INPUT TYPE="RESET" VALUE="クリア"><P>
+</CENTER>
+</FORM>
+</BODY>
+</HTML>

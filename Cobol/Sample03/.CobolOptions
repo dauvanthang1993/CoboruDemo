@@ -1,0 +1,36 @@
+[Encoding]
+Encoding=UTF8
+
+[Apdesigner Version Information]
+Version No=6.0
+
+[TargetOptions]
+TargetName=SAMPLE3
+TargetType=EXE
+BuildMode=Release
+DLLUseCBR=false
+ApplicationArch=x86
+
+[CobolProject]
+Edition=6.000
+
+[SolutionOptionsUsing]
+ProjectCompilerOptionsCheck=on
+ProjectBuildToolResourceCheck=on
+ProjectRemoteTargetOptionsCheck=off
+ProjectBuildToolPreCompilerCheck=on
+ProjectBuildToolIDLPreCompilerCheck=off
+
+[CobolCompilerOptions]
+TAB=TAB(4)
+SRF=SRF(VAR,VAR)
+MAIN=MAIN(WINMAIN)
+D-CHECK=CHECK(ALL)
+LIB=LIB(../Sample02)
+ForceCheckAllInDebugMode=true
+
+[DependencyViewSourceFiles]
+CobolSourceFileCount=2
+CobolSourceFile2=Denpyou.cob
+CobolSourceFile1=Sample3.cob
+MainFile=Sample03/Sample3.cob

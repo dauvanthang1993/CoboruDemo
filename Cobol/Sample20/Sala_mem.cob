@@ -1,0 +1,28 @@
+000010*========================================================================
+000020*　一般給与計算メソッド　　－サンプルプログラム「従業員管理（永続化）」－
+000030*
+000040*　　　一般従業員に対する給与計算を行う。
+000050*
+000060*　〇所属クラス：　一般クラス
+000070*　〇OVERRIDEメソッド（従業員クラス）
+000080*　〇出力：      　総支給（PIC S9(8)）
+000090*
+000100*                              Copyright 1998-2015 FUJITSU LIMITED
+000110*========================================================================
+000120 METHOD-ID.   Salary-method  OF  Member-class.
+000130 ENVIRONMENT        DIVISION.
+000140 CONFIGURATION      SECTION.
+000150  REPOSITORY.
+000160      CLASS  Member-class.
+000170 DATA DIVISION.
+000180 WORKING-STORAGE    SECTION.
+000190  01  Ｗ－基本給      PIC   S9(8).
+000200 LINKAGE SECTION.
+000210  01  Ｌ－総支給          PIC   S9(8).
+000220 PROCEDURE   DIVISION    RETURNING   Ｌ－総支給.
+000230*
+000240     MOVE     基本給  OF SELF    TO   Ｗ－基本給.
+000250     COMPUTE  Ｌ－総支給  =
+000260              Ｗ－基本給  +  (残業時間  *  時間外手当).
+000270*
+000280 END METHOD Salary-method.

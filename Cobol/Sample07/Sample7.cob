@@ -1,0 +1,95 @@
+000100* Copyright 1992-2015 FUJITSU LIMITED
+000200 IDENTIFICATION DIVISION.
+000300  PROGRAM-ID. SAMPLE7.
+000400*
+000500 ENVIRONMENT DIVISION.
+000600*
+000700  CONFIGURATION SECTION.
+000800  SPECIAL-NAMES.
+000900     ENVIRONMENT-NAME  IS 環境変数名
+001000     ENVIRONMENT-VALUE IS 環境変数値.
+001100*
+001200  INPUT-OUTPUT SECTION.
+001300  FILE-CONTROL.
+001400       SELECT 旧マスタファイル
+001500         ASSIGN TO INFILE
+001600         ORGANIZATION IS INDEXED
+001700         RECORD KEY IS 商品コード OF 旧マスタレコード
+001800         ALTERNATE RECORD KEY IS 商品名 OF 旧マスタレコード
+001900         ACCESS MODE IS SEQUENTIAL.
+002000       SELECT 新マスタファイル
+002100         ASSIGN TO OUTFILE
+002200         ORGANIZATION IS INDEXED
+002300         RECORD KEY IS 商品コード OF 新マスタレコード
+002400         ALTERNATE RECORD KEY IS 商品名 OF 新マスタレコード
+002500         ACCESS MODE IS SEQUENTIAL.
+002600*
+002700 DATA DIVISION.
+002800*
+002900  FILE SECTION.
+003000  FD 旧マスタファイル.
+003100  01 旧マスタレコード.
+003200     COPY  SYOHINM.
+003300  FD 新マスタファイル.
+003400  01 新マスタレコード.
+003500     COPY  SYOHINM.
+003600  WORKING-STORAGE SECTION.
+003700  01  ファイル名   PIC X(100).
+003800  01  旧ファイル名 PIC X(100).
+003900  01  新ファイル名の拡張子１  PIC X(2) VALUE ".a".
+004000  01  新ファイル名の拡張子２  PIC X(2) VALUE ".b".
+004100*
+004200 PROCEDURE DIVISION.
+004300*
+004400**（１）旧マスタファイル名を得る。
+004500      MOVE SPACE TO 旧ファイル名.
+004600      DISPLAY "INFILE" UPON 環境変数名.
+004700      ACCEPT 旧ファイル名 FROM 環境変数値
+004800                        ON EXCEPTION GO TO 終了処理
+004900      END-ACCEPT.
+005000*
+005100**（２）新マスタファイル１を作成する。
+005200      MOVE SPACE TO ファイル名.
+005300      STRING 旧ファイル名 新ファイル名の拡張子１ DELIMITED BY "  "
+005400        INTO ファイル名.
+005500      DISPLAY "OUTFILE" UPON 環境変数名.
+005600      DISPLAY ファイル名 UPON 環境変数値.
+005700      OPEN OUTPUT 新マスタファイル.
+005800      OPEN INPUT 旧マスタファイル.
+005900      START 旧マスタファイル FIRST RECORD.
+006000*
+006100 旧ファイル入力１.
+006200      READ 旧マスタファイル AT END GO TO ファイル１終了処理.
+006300        IF 商品コード OF 旧マスタレコード(1:1) = "0" THEN
+006400          MOVE 旧マスタレコード TO 新マスタレコード
+006500          WRITE 新マスタレコード
+006600        END-IF.
+006700      GO TO 旧ファイル入力１.
+006800 ファイル１終了処理.
+006900      CLOSE 旧マスタファイル 新マスタファイル.
+007000*
+007100**（３）新マスタファイル２を作成する。
+007200      MOVE SPACE TO ファイル名.
+007300      STRING 旧ファイル名 新ファイル名の拡張子２ DELIMITED BY "  "
+007400        INTO ファイル名.
+007500      DISPLAY "OUTFILE" UPON 環境変数名.
+007600      DISPLAY ファイル名 UPON 環境変数値.
+007700      OPEN OUTPUT 新マスタファイル
+007800      OPEN INPUT 旧マスタファイル.
+007900      START 旧マスタファイル FIRST RECORD.
+008000*
+008100 旧ファイル入力２.
+008200      READ 旧マスタファイル AT END GO TO ファイル２終了処理.
+008300        IF 商品コード OF 旧マスタレコード(1:1) NOT = "0" THEN
+008400          MOVE 旧マスタレコード TO 新マスタレコード
+008500          WRITE 新マスタレコード
+008600        END-IF.
+008700      GO TO 旧ファイル入力２.
+008800 ファイル２終了処理.
+008900      CLOSE 旧マスタファイル 新マスタファイル.
+009000*
+009100**（４）終了処理。
+009200 終了処理.
+009300      EXIT PROGRAM.
+009400 END PROGRAM SAMPLE7.
+

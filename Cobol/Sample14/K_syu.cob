@@ -1,0 +1,67 @@
+000100* Copyright 1992-2015 FUJITSU LIMITED
+000200 IDENTIFICATION DIVISION.
+000300 PROGRAM-ID. K_SYU.
+000400*
+000500 ENVIRONMENT DIVISION.
+000600 CONFIGURATION SECTION.
+000700 INPUT-OUTPUT SECTION.
+000800 FILE-CONTROL.
+000900      SELECT  貯金ファイル
+001000                ASSIGN  TO  "tyokin.dat"
+001100                ORGANIZATION IS  INDEXED
+001200                RECORD KEY   IS  口座番号
+001300                ACCESS MODE  IS  RANDOM.
+001400*
+001500 DATA DIVISION.
+001600 FILE SECTION.
+001700 FD   貯金ファイル.
+001800 01   貯金レコード.
+001900      03 口座番号     PIC  9(5).
+002000      03 暗証番号     PIC  9(4).
+002100      03 氏名         PIC  N(6).
+002200      03 貯金額       PIC  9(9).   
+002300*
+002400 WORKING-STORAGE SECTION.
+002500 77 貯金額判定        PIC S9(9).
+002600*
+002700 LINKAGE SECTION.
+002800 01 ＶＢ口座番号      PIC  9(5) COMP-5.
+002900 01 ＶＢ出金額        PIC S9(9) COMP-5.
+003000 01 ＶＢ貯金額        PIC S9(9) COMP-5.
+003100 01 エラー番号        PIC  9(4) COMP-5.
+003200*
+003300 PROCEDURE DIVISION WITH STDCALL LINKAGE 
+003400      USING ＶＢ口座番号 ＶＢ出金額 ＶＢ貯金額 エラー番号.
+003500*
+003600      OPEN I-O 貯金ファイル
+003700      MOVE ＶＢ口座番号 TO 口座番号
+003800*
+003900      READ 貯金ファイル
+004000            INVALID KEY
+004100                  MOVE 7 TO エラー番号
+004200                  PERFORM ファイルを閉じる
+004300                  EXIT PROGRAM
+004400            NOT INVALID KEY
+004500                  PERFORM 貯金額チェック
+004600      END-READ
+004700*
+004800      REWRITE 貯金レコード
+004900* 
+005000      MOVE 貯金額 TO ＶＢ貯金額
+005100      MOVE 0 TO エラー番号
+005200      PERFORM ファイルを閉じる
+005300      EXIT PROGRAM.
+005400*
+005500*
+005600 貯金額チェック.
+005700      COMPUTE 貯金額判定 = 貯金額 - ＶＢ出金額
+005800      IF 貯金額判定 < 0
+005900            MOVE 9 TO エラー番号
+006000            PERFORM ファイルを閉じる
+006100            EXIT PROGRAM
+006200      END-IF
+006300      MOVE 貯金額判定 TO 貯金額.
+006400*
+006500 ファイルを閉じる.
+006600      CLOSE 貯金ファイル.
+006700

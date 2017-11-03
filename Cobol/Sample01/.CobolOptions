@@ -1,0 +1,37 @@
+[Encoding]
+Encoding=UTF8
+
+[Apdesigner Version Information]
+Version No=6.0
+
+[DependencyViewSourceFiles]
+CobolSourceFileCount=1
+CobolSourceFile1=Sample1.cob
+MainFile=Sample01/Sample1.cob
+
+[CobolCompilerOptions]
+TAB=TAB(4)
+SRF=SRF(VAR,VAR)
+MAIN=MAIN(WINMAIN)
+D-CHECK=CHECK(ALL)
+ForceCheckAllInDebugMode=true
+
+[CobolProject]
+Edition=7.000
+
+
+[SolutionOptionsUsing]
+ProjectCompilerOptionsCheck=on
+ProjectBuildToolResourceCheck=off
+ProjectFileContentsCheck=off
+ProjectRemoteTargetOptionsCheck=off
+ProjectBuildToolPreCompilerCheck=off
+ProjectBuildToolIDLPreCompilerCheck=off
+
+[TargetOptions]
+TargetName=SAMPLE30
+ApplicationArch=x86
+JEFOption=false
+TargetType=EXE
+BuildMode=Debug
+DLLUseCBR=false

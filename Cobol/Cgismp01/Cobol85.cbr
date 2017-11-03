@@ -1,0 +1,5 @@
+@CBR_CGI_LOGFILE=cgismp01.log
+@CBR_CGI_SEVERITY=0
+@ShowIcon=NO
+@MessOutFile=cgismp01.msg
+@WinCloseMsg=OFF

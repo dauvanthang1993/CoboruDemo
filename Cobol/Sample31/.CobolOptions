@@ -1,0 +1,37 @@
+[Encoding]
+Encoding=UTF8
+
+[Apdesigner Version Information]
+Version No=6.0
+
+[CobolProject]
+Edition=6.000
+
+[SolutionOptionsUsing]
+ProjectCompilerOptionsCheck=on
+ProjectBuildToolResourceCheck=on
+ProjectRemoteTargetOptionsCheck=off
+ProjectBuildToolPreCompilerCheck=on
+ProjectBuildToolIDLPreCompilerCheck=off
+
+[TargetOptions]
+TargetName=MSGBOX
+ApplicationArch=x86
+TargetType=EXE
+BuildMode=Debug
+DLLUseCBR=false
+
+[CobolCompilerOptions]
+TAB=TAB(4)
+SRF=SRF(VAR,VAR)
+MAIN=MAIN(WINMAIN)
+D-CHECK=CHECK(ALL)
+ForceCheckAllInDebugMode=true
+
+[DependencyViewSourceFiles]
+CobolSourceFileCount=1
+CobolSourceFile1=Msgbox.cob
+MainFile=Sample31/Msgbox.cob
+[LinkerOptions]
+LibraryFileCount=1
+LibraryFile1=C:\Program Files\Windows Kits\8.1\lib\winv6.3\um\x86\user32.lib

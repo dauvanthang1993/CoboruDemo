@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SAMPLE14" default="incremental_build" basedir=".">
+	<fail unless="eclipse.running"
+	      message="このAntスクリプトはCOBOLビルダが内部的に利用するためのものであり、直接実行することはできません。" />
+	<property name="project.name" value="${ant.project.name}" />
+	<property name="foe" value="true" />
+	<eclipse.convertPath property="workspace_location" resourcepath="/" />
+	<eclipse.convertPath property="project_location"
+	                     resourcepath="/${project.name}" />
+	<property name="apdesigner.build.version" value="3.0.1" />
+	<property name="NETCOBOL" value="C:\Program Files (x86)\NetCOBOL" />
+
+	<target name="init">
+	</target>
+
+	<target name="cobol_buildtool-init"
+	        description="プロパティーの初期化中"
+	        unless="cobol_buildtool-initialized">
+		<property name="cobol_buildtool-initialized" value="" />
+
+		<property name="cobol_buildtool-NAMECompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),NAME&quot; " />
+		<property name="cobol_buildtool-CompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR)&quot; " />
+		<property name="cobol_buildtool-CompilerOptionsOfMain"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR)&quot; " />
+		<property name="cobol_buildtool-RepCompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),CREATE(REP)&quot; " />
+		<property name="cobol_buildtool-CompilerOtherOptions" value="" />
+		<property name="cobol_buildtool-CobolCompiler" value="cobol32" />
+		<property name="cobol_buildtool-SourceFile" value="" />
+		<property name="cobol_buildtool-SourceReferenceFormat"
+		          value="SRF(VAR,VAR)" />
+		<property name="cobol_buildtool-UTF8Options" value="" />
+	</target>
+	<taskdef name="IAPWUptodate"
+	         classname="com.fujitsu.cbdt.build.taskdefs.IAPWUptodate" />
+
+	<target name="cobol_buildtool-compile_K_syu.OBJ"
+	        description="ソースファイルの翻訳 K_syu.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_K_syu.OBJ"
+	        if="cobol_buildtool-K_syu.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;K_syu.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_K_syu.OBJ"
+	        description="K_syu.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-K_syu.OBJ_uptodate"
+		              file="K_syu.cob"
+		              outputFiles="K_syu.OBJ"
+		              dependentFiles="" />
+	</target>
+	<target name="cobol_buildtool-fail_for_K_syu.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-K_syu.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: K_syu.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_K_ken.OBJ"
+	        description="ソースファイルの翻訳 K_ken.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_K_ken.OBJ"
+	        if="cobol_buildtool-K_ken.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;K_ken.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_K_ken.OBJ"
+	        description="K_ken.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-K_ken.OBJ_uptodate"
+		              file="K_ken.cob"
+		              outputFiles="K_ken.OBJ"
+		              dependentFiles="" />
+	</target>
+	<target name="cobol_buildtool-fail_for_K_ken.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-K_ken.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: K_ken.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_K_nyu.OBJ"
+	        description="ソースファイルの翻訳 K_nyu.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_K_nyu.OBJ"
+	        if="cobol_buildtool-K_nyu.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;K_nyu.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_K_nyu.OBJ"
+	        description="K_nyu.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-K_nyu.OBJ_uptodate"
+		              file="K_nyu.cob"
+		              outputFiles="K_nyu.OBJ"
+		              dependentFiles="" />
+	</target>
+	<target name="cobol_buildtool-fail_for_K_nyu.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-K_nyu.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: K_nyu.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_K_sin.OBJ"
+	        description="ソースファイルの翻訳 K_sin.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_K_sin.OBJ"
+	        if="cobol_buildtool-K_sin.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;K_sin.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_K_sin.OBJ"
+	        description="K_sin.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-K_sin.OBJ_uptodate"
+		              file="K_sin.cob"
+		              outputFiles="K_sin.OBJ"
+		              dependentFiles="" />
+	</target>
+	<target name="cobol_buildtool-fail_for_K_sin.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-K_sin.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: K_sin.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-FileCompile"
+	        description="ソースファイルの翻訳"
+	        depends="cobol_buildtool-init,init">
+		<exec dir="."
+		      executable="${cobol_buildtool-CobolCompiler}"
+		      failonerror="${foe}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions} ${cobol_buildtool-MainFileOption} ${cobol_buildtool-UTF8Options} &quot;${cobol_buildtool-SourceFile}&quot;" />
+		</exec>
+	</target>
+	<target name="cobol_buildtool-cobol_compile_build">
+
+		<antcall target="cobol_buildtool-compile_K_syu.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_K_ken.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_K_nyu.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_K_sin.OBJ" />
+
+	</target>
+	<target name="cobol_buildtool-cobol_compile_rebuild">
+
+		<antcall target="cobol_buildtool-clean" />
+
+		<antcall target="cobol_buildtool-cobol_compile_build" />
+
+	</target>
+	<target name="cobol_buildtool-clean"
+	        description="翻訳ターゲットをすべてクリーン中"
+	        depends="cobol_buildtool-init,init">
+		<delete>
+			<fileset dir="." casesensitive="false">
+				<patternset>
+					<include name="K_syu.SVD" />
+					<include name="K_ken.SVD" />
+					<include name="K_nyu.SVD" />
+					<include name="K_sin.SVD" />
+					<include name="K_syu.OBJ" />
+					<include name="K_ken.OBJ" />
+					<include name="K_nyu.OBJ" />
+					<include name="K_sin.OBJ" />
+
+				</patternset>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="link_buildtool-init"
+	        description="リンカのプロパティーを初期化します。"
+	        unless="link_buildtool-initialized">
+		<property name="link_buildtool-initialized" value="" />
+		<property name="link_buildtool-LinkerOptions"
+		          value=" /DEBUG /DYNAMICBASE:NO /INCREMENTAL:NO /EXPORT:K_SYU /EXPORT:K_KEN /EXPORT:K_NYU /EXPORT:K_SIN" />
+		<property name="link_buildtool-LinkerLibraryOptions" value="" />
+		<property name="link_buildtool-LinkerDllEntryOptions" value="" />
+		<property name="link_buildtool-Linker"
+		          value="&quot;C:\Program Files (x86)\NetCOBOL\link&quot;" />
+	</target>
+
+	<target name="link_buildtool-link_build"
+	        description="K_KEN.dllの取得先にリンクします。"
+	        depends="link_buildtool-init,init,link_buildtool-check_K_KEN.dll"
+	        unless="link_buildtool-K_KEN.dll_uptodate">
+		<exec dir="."
+		      executable="${link_buildtool-Linker}"
+		      failonerror="${foe}">
+			<arg line="/LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\ucrt\x86\&quot; /LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\um\x86\&quot; /OUT:&quot;K_KEN.dll&quot; ${link_buildtool-LinkerOptions} ${link_buildtool-LinkerLibraryOptions} ${link_buildtool-LinkerDllEntryOptions}  /DLL &quot;K_syu.OBJ&quot; &quot;K_ken.OBJ&quot; &quot;K_nyu.OBJ&quot; &quot;K_sin.OBJ&quot;  &quot;${NETCOBOL}\F3BICIMP.LIB&quot; &quot;/NOENTRY&quot; &quot;C:\Program Files (x86)\Windows Kits\10\lib\10.0.15063.0\um\x86\KERNEL32.LIB&quot;" />
+		</exec>
+	</target>
+
+	<target name="link_buildtool-check_K_KEN.dll"
+	        description="K_KEN.dllが最新のファイルであるか調査中">
+		<uptodate property="link_buildtool-K_KEN.dll_uptodate">
+			<srcfiles dir="." casesensitive="false">
+				<patternset>
+					<include name="K_syu.OBJ" />
+					<include name="K_ken.OBJ" />
+					<include name="K_nyu.OBJ" />
+					<include name="K_sin.OBJ" />
+				</patternset>
+			</srcfiles>
+			<mapper type="merge" to="${project_location}\K_KEN.dll" />
+		</uptodate>
+	</target>
+	<target name="link_buildtool-link_rebuild">
+		<antcall target="link_buildtool-clean" />
+		<antcall target="link_buildtool-link_build" />
+	</target>
+
+	<target name="link_buildtool-clean"
+	        description="リンカのターゲットをすべてクリアします。"
+	        depends="link_buildtool-init,init">
+		<delete file="K_KEN.dll" />
+		<delete file="K_KEN.dll.in2" />
+		<delete file="K_KEN.exp" />
+		<delete file="K_KEN.lib" />
+		<delete file="K_KEN.ilk" />
+		<delete file="K_KEN.pdb" />
+
+	</target>
+
+	<target name="incremental_build"
+	        depends="cobol_buildtool-cobol_compile_build,link_buildtool-link_build" />
+
+	<target name="clean_build"
+	        depends="cobol_buildtool-clean,link_buildtool-clean" />
+</project>

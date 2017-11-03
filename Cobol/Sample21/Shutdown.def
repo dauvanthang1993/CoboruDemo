@@ -1,0 +1,6 @@
+LIBRARY Shutdown 
+EXPORTS 
+    GetExtensionVersion 
+    HttpExtensionProc 
+    TerminateExtension 
+

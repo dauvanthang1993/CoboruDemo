@@ -1,0 +1,6 @@
+@CBR_ISAPI_LOGFILE=C:\etc\isapi.log
+@CBR_ISAPI_SEVERITY=0
+@ShowIcon=NO
+@NoMessage=YES
+@MessOutFile=C:\etc\ISASMPL1.txt
+@WinCloseMsg=OFF

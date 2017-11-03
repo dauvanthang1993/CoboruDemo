@@ -1,0 +1,142 @@
+000010*----------------------------------------------------------------*
+000020* Copyright 1997-2015 FUJITSU LIMITED                            *
+000030*                                                                *
+000040*  ファイル名： CGISMP01.COB                                     *
+000050*  概要：       CGIサブルーチンの例題                            *
+000060*----------------------------------------------------------------*
+000070 IDENTIFICATION   DIVISION.
+000080 PROGRAM-ID.      CGISMP01.
+000090 ENVIRONMENT      DIVISION.
+000100 CONFIGURATION    SECTION.
+000110 INPUT-OUTPUT     SECTION.
+000120 DATA             DIVISION.
+000130 WORKING-STORAGE  SECTION.
+000140   COPY  COBW3.
+000150*
+000160 01  WORK-CHARA-LENGTH              PIC S9(4) COMP-5 .
+000170 01  WORK-CHARA                     PIC X(50) VALUE SPACE .
+000180 01  WORK-COMMA                     PIC X(2)  VALUE "、" .
+000190 01  WORK-CNTR1                     PIC 9(4)  COMP-5 .
+000200 01  WORK-CNTR2                     PIC 9(4)  COMP-5 .
+000210 01  SANITIZED-DATA                 PIC  X(1024) .
+000220 01  SANITIZED-LENGTH               PIC  S9(4) COMP-5.
+000230*
+000240 PROCEDURE        DIVISION.
+000250*
+000260 CGISMP01-START.
+000270*
+000280*  ＣＧＩサブルーチンパラメタ域の初期化
+000290     MOVE  LOW-VALUE            TO     COBW3 .
+000300*
+000310*  ＣＧＩサブルーチン作業環境の設定及びＷｅｂパラメタの獲得
+000320     CALL  "COBW3_INIT"         USING  COBW3 .
+000330*
+000340*  名前の取得
+000350     MOVE  "NAME1"              TO     COBW3-SEARCH-DATA .
+000360     CALL  "COBW3_GET_VALUE_XX" USING  COBW3 .
+000370
+000380*  結果出力用ページ内の変換名（名前）の登録
+000390     MOVE  "GET-TEXT"           TO     COBW3-CNV-NAME .
+000400     MOVE  SPACE                TO     COBW3-CNV-VALUE .
+000410
+000420*  クロスサイトスクリプティング脆弱性対策
+000430     PERFORM サニタイズ処理.
+000440     MOVE  SANITIZED-DATA       TO     COBW3-CNV-VALUE .
+000450     CALL  "COBW3_SET_CNV_XX"   USING  COBW3 .
+000460
+000470*  性別の取得
+000480     MOVE  "RADIO1"             TO     COBW3-SEARCH-DATA .
+000490     CALL  "COBW3_GET_VALUE_XX" USING  COBW3 .
+000500
+000510*  結果出力用ページ内の変換名（性別）の登録
+000520     MOVE  "GET-RADIO"          TO     COBW3-CNV-NAME .
+000530
+000540*  クロスサイトスクリプティング脆弱性対策
+000550     PERFORM サニタイズ処理.
+000560     MOVE  SANITIZED-DATA       TO     COBW3-CNV-VALUE .
+000570     CALL  "COBW3_SET_CNV_XX"   USING  COBW3 .
+000580
+000590*  趣味の取得と出力データの作成
+000600     MOVE  "CHECK1"             TO     COBW3-SEARCH-DATA .
+000610     MOVE  1                    TO     WORK-CHARA-LENGTH .
+000620
+000630     PERFORM WITH TEST AFTER
+000640             VARYING COBW3-NUMBER FROM 1 BY 1
+000650               UNTIL COBW3-NUMBER > 4
+000660
+000670       CALL "COBW3_GET_VALUE_XX" USING COBW3
+000680         PERFORM サニタイズ処理
+000690         IF  COBW3-SEARCH-FLAG-EXIST   THEN
+000700           IF  COBW3-NUMBER  >  1    THEN
+000710             MOVE  WORK-COMMA TO  WORK-CHARA(WORK-CHARA-LENGTH:2)
+000720             ADD   2          TO  WORK-CHARA-LENGTH
+000730           END-IF
+000740           MOVE  SANITIZED-DATA(1:SANITIZED-LENGTH)
+000750                TO WORK-CHARA(WORK-CHARA-LENGTH:SANITIZED-LENGTH)
+000760           ADD   SANITIZED-LENGTH  TO  WORK-CHARA-LENGTH
+000770         END-IF
+000780
+000790     END-PERFORM .
+000800
+000810*  趣味が選択されなかった時の出力データの作成
+000820     IF  WORK-CHARA-LENGTH  =  1  THEN
+000830       MOVE   "?"                 TO     WORK-CHARA
+000840     END-IF .
+000850
+000860*  結果出力用ページ内の変換名（趣味）の登録
+000870     MOVE  "GET-CHECK"          TO     COBW3-CNV-NAME .
+000880     MOVE  WORK-CHARA           TO     COBW3-CNV-VALUE .
+000890     CALL  "COBW3_SET_CNV_XX"   USING  COBW3 .
+000900
+000910*  ＣＯＮＴＥＮＴ－ＴＹＰＥヘッダの宣言
+000920     SET   COBW3-CONTENT-TYPE-HTML TO TRUE .
+000930
+000940*  ヘッダの出力
+000950     CALL  "COBW3_PUT_HEAD"     USING  COBW3 .
+000960
+000970*  結果出力用ページのファイル名の指定
+000980     MOVE  "CGISMP01_1.htm"     TO  COBW3-HTML-FILENAME .
+000990
+001000*  結果出力用ページの出力
+001010     CALL  "COBW3_PUT_HTML"     USING  COBW3 .
+001020
+001030*  ＨＴＭＬ文書の最終データの出力
+001040     MOVE "<CENTER>ご協力ありがとうございました。</CENTER>"
+001050                                TO     COBW3-PUT-STRING.
+001060     CALL  "COBW3_PUT_TEXT"     USING  COBW3 .
+001070     MOVE "</BODY></HTML>"      TO     COBW3-PUT-STRING.
+001080     CALL  "COBW3_PUT_TEXT"     USING  COBW3 .
+001090
+001100*  ＣＧＩサブルーチン作業領域の解放
+001110     CALL  "COBW3_FREE"         USING  COBW3 .
+001120*
+001130 CGISMP01-END.
+001140*
+001150     EXIT PROGRAM.
+001160
+001170 サニタイズ処理 SECTION.
+001180     MOVE  0                    TO     WORK-CNTR1 .
+001190     MOVE  1                    TO     WORK-CNTR2 .
+001200     MOVE  SPACE                TO     SANITIZED-DATA .
+001210     PERFORM WITH TEST BEFORE
+001220             VARYING WORK-CNTR1 FROM 1 BY 1
+001230               UNTIL WORK-CNTR1 > COBW3-GET-LENGTH
+001240         EVALUATE COBW3-GET-DATA(WORK-CNTR1:1)
+001250           WHEN "<"
+001260             MOVE "&lt;"        TO     SANITIZED-DATA(WORK-CNTR2:4)
+001270             ADD  4             TO     WORK-CNTR2
+001280           WHEN ">"
+001290             MOVE "&gt;"        TO     SANITIZED-DATA(WORK-CNTR2:4)
+001300             ADD  4             TO     WORK-CNTR2
+001310           WHEN "&"
+001320             MOVE "&amp;"       TO     SANITIZED-DATA(WORK-CNTR2:5)
+001330             ADD  5             TO     WORK-CNTR2
+001340           WHEN OTHER
+001350             MOVE COBW3-GET-DATA(WORK-CNTR1:1)
+001360                                TO     SANITIZED-DATA(WORK-CNTR2:1)
+001370             ADD  1             TO     WORK-CNTR2
+001380         END-EVALUATE
+001390     END-PERFORM.
+001400     MOVE  WORK-CNTR2           TO     SANITIZED-LENGTH.
+001410 サニタイズ処理終了.
+001420     EXIT.

@@ -1,0 +1,33 @@
+[Encoding]
+Encoding=UTF8
+
+[Apdesigner Version Information]
+Version No=6.0
+
+[CobolProject]
+Edition=6.000
+
+[SolutionOptionsUsing]
+ProjectCompilerOptionsCheck=off
+ProjectBuildToolResourceCheck=on
+ProjectRemoteTargetOptionsCheck=off
+ProjectBuildToolPreCompilerCheck=on
+ProjectBuildToolIDLPreCompilerCheck=off
+
+[TargetOptions]
+TargetName=INSATSU
+ApplicationArch=x86
+TargetType=DLL
+BuildMode=Debug
+DLLUseCBR=false
+
+[CobolCompilerOptions]
+TAB=TAB(4)
+SRF=SRF(FREE,FREE)
+D-CHECK=CHECK(ALL)
+LIB=LIB(../Sample05_LIB)
+ForceCheckAllInDebugMode=true
+
+[DependencyViewSourceFiles]
+CobolSourceFileCount=1
+CobolSourceFile1=Insatsu.cob

@@ -1,0 +1,6 @@
+LIBRARY Confirm 
+EXPORTS 
+    GetExtensionVersion 
+    HttpExtensionProc 
+    TerminateExtension 
+

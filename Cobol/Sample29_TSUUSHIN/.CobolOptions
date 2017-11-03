@@ -1,0 +1,35 @@
+[Encoding]
+Encoding=UTF8
+
+[Apdesigner Version Information]
+Version No=6.0
+
+[CobolProject]
+Edition=6.000
+
+[TargetOptions]
+TargetName=TSUUSHIN
+ApplicationArch=x86
+TargetType=EXE
+BuildMode=Debug
+DLLUseCBR=false
+
+[CobolCompilerOptions]
+TAB=TAB(4)
+SRF=SRF(VAR,VAR)
+MAIN=MAIN(WINMAIN)
+D-CHECK=CHECK(ALL)
+LIB=LIB(../Sample29_EXE)
+ForceCheckAllInDebugMode=true
+
+[DependencyViewSourceFiles]
+CobolSourceFileCount=1
+CobolSourceFile1=Tsuushin.cob
+MainFile=Sample29_TSUUSHIN/Tsuushin.cob
+
+[SolutionOptionsUsing]
+ProjectCompilerOptionsCheck=on
+ProjectBuildToolResourceCheck=on
+ProjectRemoteTargetOptionsCheck=off
+ProjectBuildToolPreCompilerCheck=on
+ProjectBuildToolIDLPreCompilerCheck=off

@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Sample19" default="incremental_build" basedir=".">
+	<fail unless="eclipse.running"
+	      message="このAntスクリプトはCOBOLビルダが内部的に利用するためのものであり、直接実行することはできません。" />
+	<property name="project.name" value="${ant.project.name}" />
+	<property name="foe" value="true" />
+	<eclipse.convertPath property="workspace_location" resourcepath="/" />
+	<eclipse.convertPath property="project_location"
+	                     resourcepath="/${project.name}" />
+	<property name="apdesigner.build.version" value="3.0.1" />
+	<property name="NETCOBOL" value="C:\Program Files (x86)\NetCOBOL" />
+
+	<target name="init">
+	</target>
+
+	<target name="cobol_buildtool-init"
+	        description="プロパティの初期化中"
+	        unless="cobol_buildtool-initialized">
+		<property name="cobol_buildtool-initialized" value="" />
+
+		<property name="cobol_buildtool-NAMECompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),NAME&quot; " />
+		<property name="cobol_buildtool-CompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR)&quot; " />
+		<property name="cobol_buildtool-CompilerOptionsOfMain"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),MAIN(WINMAIN)&quot; " />
+		<property name="cobol_buildtool-RepCompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),CREATE(REP)&quot; " />
+		<property name="cobol_buildtool-CompilerOtherOptions" value="" />
+		<property name="cobol_buildtool-CobolCompiler" value="cobol32" />
+		<property name="cobol_buildtool-SourceFile" value="" />
+		<property name="cobol_buildtool-SourceReferenceFormat"
+		          value="SRF(VAR,VAR)" />
+		<property name="cobol_buildtool-UTF8Options" value="" />
+	</target>
+	<taskdef name="IAPWUptodate"
+	         classname="com.fujitsu.cbdt.build.taskdefs.IAPWUptodate" />
+
+	<target name="cobol_buildtool-compile_Allmem_m.OBJ"
+	        description="ソースファイルの翻訳 Allmem_m.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Allmem_m.OBJ"
+	        if="cobol_buildtool-Allmem_m.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Allmem_m.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Allmem_m.OBJ"
+	        description="Allmem_m.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Allmem_m.OBJ_uptodate"
+		              file="Allmem_m.cob"
+		              outputFiles="Allmem_m.OBJ"
+		              dependentFiles="" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Allmem_m.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Allmem_m.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Allmem_m.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Addr_m.OBJ"
+	        description="ソースファイルの翻訳 Addr_m.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Addr_m.OBJ"
+	        if="cobol_buildtool-Addr_m.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Addr_m.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Addr_m.OBJ"
+	        description="Addr_m.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Addr_m.OBJ_uptodate"
+		              file="Addr_m.cob"
+		              outputFiles="Addr_m.OBJ"
+		              dependentFiles="" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Addr_m.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Addr_m.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Addr_m.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Address.OBJ"
+	        description="ソースファイルの翻訳 Address.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Address.OBJ"
+	        if="cobol_buildtool-Address.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Address.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Address.OBJ"
+	        description="Address.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Address.OBJ_uptodate"
+		              file="Address.cob"
+		              outputFiles="Address.OBJ"
+		              dependentFiles="SAMPLE19/ADDRESSMASTER-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Address.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Address.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Address.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Allmem.OBJ"
+	        description="ソースファイルの翻訳 Allmem.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Allmem.OBJ"
+	        if="cobol_buildtool-Allmem.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Allmem.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Allmem.OBJ"
+	        description="Allmem.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Allmem.OBJ_uptodate"
+		              file="Allmem.cob"
+		              outputFiles="Allmem.OBJ"
+		              dependentFiles="SAMPLE19/ADDRESS-CLASS.rep;SAMPLE19/MEMBERMASTER-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Allmem.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Allmem.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Allmem.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Manager.OBJ"
+	        description="ソースファイルの翻訳 Manager.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Manager.OBJ"
+	        if="cobol_buildtool-Manager.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Manager.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Manager.OBJ"
+	        description="Manager.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Manager.OBJ_uptodate"
+		              file="Manager.cob"
+		              outputFiles="Manager.OBJ"
+		              dependentFiles="SAMPLE19/ALLMEMBER-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Manager.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Manager.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Manager.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Member.OBJ"
+	        description="ソースファイルの翻訳 Member.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Member.OBJ"
+	        if="cobol_buildtool-Member.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Member.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Member.OBJ"
+	        description="Member.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Member.OBJ_uptodate"
+		              file="Member.cob"
+		              outputFiles="Member.OBJ"
+		              dependentFiles="SAMPLE19/ALLMEMBER-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Member.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Member.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Member.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Set.OBJ"
+	        description="ソースファイルの翻訳 Set.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Set.OBJ"
+	        if="cobol_buildtool-Set.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Set.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Set.OBJ"
+	        description="Set.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Set.OBJ_uptodate"
+		              file="Set.cob"
+		              outputFiles="Set.OBJ"
+		              dependentFiles="SAMPLE19/ADDRESS-CLASS.rep;SAMPLE19/ALLMEMBER-CLASS.rep;SAMPLE19/MEMBERMASTER-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Set.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Set.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Set.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Store.OBJ"
+	        description="ソースファイルの翻訳 Store.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Store.OBJ"
+	        if="cobol_buildtool-Store.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Store.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Store.OBJ"
+	        description="Store.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Store.OBJ_uptodate"
+		              file="Store.cob"
+		              outputFiles="Store.OBJ"
+		              dependentFiles="SAMPLE19/ADDRESS-CLASS.rep;SAMPLE19/ALLMEMBER-CLASS.rep;SAMPLE19/MEMBERMASTER-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Store.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Store.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Store.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Main.OBJ"
+	        description="ソースファイルの翻訳 Main.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Main.OBJ"
+	        if="cobol_buildtool-Main.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptionsOfMain} ${cobol_buildtool-CompilerOtherOptions}  -M  -Dt &quot;Main.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Main.OBJ"
+	        description="Main.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Main.OBJ_uptodate"
+		              file="Main.cob"
+		              outputFiles="Main.OBJ"
+		              dependentFiles="SAMPLE19/ADDRESS-CLASS.rep;SAMPLE19/ALLMEMBER-CLASS.rep;SAMPLE19/MANAGER-CLASS.rep;SAMPLE19/MEMBER-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Main.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Main.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Main.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Sala_man.OBJ"
+	        description="ソースファイルの翻訳 Sala_man.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Sala_man.OBJ"
+	        if="cobol_buildtool-Sala_man.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Sala_man.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Sala_man.OBJ"
+	        description="Sala_man.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Sala_man.OBJ_uptodate"
+		              file="Sala_man.cob"
+		              outputFiles="Sala_man.OBJ"
+		              dependentFiles="SAMPLE19/MANAGER-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Sala_man.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Sala_man.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Sala_man.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Bonu_man.OBJ"
+	        description="ソースファイルの翻訳 Bonu_man.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Bonu_man.OBJ"
+	        if="cobol_buildtool-Bonu_man.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Bonu_man.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Bonu_man.OBJ"
+	        description="Bonu_man.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Bonu_man.OBJ_uptodate"
+		              file="Bonu_man.cob"
+		              outputFiles="Bonu_man.OBJ"
+		              dependentFiles="SAMPLE19/MANAGER-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Bonu_man.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Bonu_man.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Bonu_man.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Man_set.OBJ"
+	        description="ソースファイルの翻訳 Man_set.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Man_set.OBJ"
+	        if="cobol_buildtool-Man_set.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Man_set.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Man_set.OBJ"
+	        description="Man_set.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Man_set.OBJ_uptodate"
+		              file="Man_set.cob"
+		              outputFiles="Man_set.OBJ"
+		              dependentFiles="SAMPLE19/MANAGER-CLASS.rep;SAMPLE19/MEMBERMASTER-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Man_set.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Man_set.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Man_set.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Man_stor.OBJ"
+	        description="ソースファイルの翻訳 Man_stor.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Man_stor.OBJ"
+	        if="cobol_buildtool-Man_stor.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Man_stor.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Man_stor.OBJ"
+	        description="Man_stor.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Man_stor.OBJ_uptodate"
+		              file="Man_stor.cob"
+		              outputFiles="Man_stor.OBJ"
+		              dependentFiles="SAMPLE19/MANAGER-CLASS.rep;SAMPLE19/MEMBERMASTER-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Man_stor.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Man_stor.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Man_stor.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Sala_mem.OBJ"
+	        description="ソースファイルの翻訳 Sala_mem.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Sala_mem.OBJ"
+	        if="cobol_buildtool-Sala_mem.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Sala_mem.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Sala_mem.OBJ"
+	        description="Sala_mem.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Sala_mem.OBJ_uptodate"
+		              file="Sala_mem.cob"
+		              outputFiles="Sala_mem.OBJ"
+		              dependentFiles="SAMPLE19/MEMBER-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Sala_mem.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Sala_mem.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Sala_mem.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Bonu_mem.OBJ"
+	        description="ソースファイルの翻訳 Bonu_mem.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Bonu_mem.OBJ"
+	        if="cobol_buildtool-Bonu_mem.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Bonu_mem.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Bonu_mem.OBJ"
+	        description="Bonu_mem.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Bonu_mem.OBJ_uptodate"
+		              file="Bonu_mem.cob"
+		              outputFiles="Bonu_mem.OBJ"
+		              dependentFiles="SAMPLE19/MEMBER-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Bonu_mem.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Bonu_mem.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Bonu_mem.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Mem_set.OBJ"
+	        description="ソースファイルの翻訳 Mem_set.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Mem_set.OBJ"
+	        if="cobol_buildtool-Mem_set.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Mem_set.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Mem_set.OBJ"
+	        description="Mem_set.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Mem_set.OBJ_uptodate"
+		              file="Mem_set.cob"
+		              outputFiles="Mem_set.OBJ"
+		              dependentFiles="SAMPLE19/MEMBER-CLASS.rep;SAMPLE19/MEMBERMASTER-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Mem_set.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Mem_set.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Mem_set.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Mem_stor.OBJ"
+	        description="ソースファイルの翻訳 Mem_stor.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Mem_stor.OBJ"
+	        if="cobol_buildtool-Mem_stor.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Mem_stor.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Mem_stor.OBJ"
+	        description="Mem_stor.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Mem_stor.OBJ_uptodate"
+		              file="Mem_stor.cob"
+		              outputFiles="Mem_stor.OBJ"
+		              dependentFiles="SAMPLE19/MEMBER-CLASS.rep;SAMPLE19/MEMBERMASTER-CLASS.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Mem_stor.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Mem_stor.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Mem_stor.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-FileCompile"
+	        description="ソースファイルの翻訳"
+	        depends="cobol_buildtool-init,init">
+		<exec dir="."
+		      executable="${cobol_buildtool-CobolCompiler}"
+		      failonerror="${foe}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions} ${cobol_buildtool-MainFileOption} ${cobol_buildtool-UTF8Options} &quot;${cobol_buildtool-SourceFile}&quot;" />
+		</exec>
+	</target>
+	<target name="cobol_buildtool-cobol_compile_build">
+
+		<antcall target="cobol_buildtool-compile_Allmem_m.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Addr_m.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Address.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Allmem.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Manager.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Member.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Set.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Store.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Main.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Sala_man.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Bonu_man.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Man_set.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Man_stor.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Sala_mem.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Bonu_mem.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Mem_set.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Mem_stor.OBJ" />
+
+	</target>
+	<target name="cobol_buildtool-cobol_compile_rebuild">
+
+		<antcall target="cobol_buildtool-clean" />
+
+		<antcall target="cobol_buildtool-cobol_compile_build" />
+
+	</target>
+	<target name="cobol_buildtool-clean"
+	        description="翻訳ターゲットをすべてクリーン中"
+	        depends="cobol_buildtool-init,init">
+		<delete>
+			<fileset dir="." casesensitive="false">
+				<patternset>
+					<include name="Allmem_m.SVD" />
+					<include name="Addr_m.SVD" />
+					<include name="Address.SVD" />
+					<include name="Allmem.SVD" />
+					<include name="Manager.SVD" />
+					<include name="Member.SVD" />
+					<include name="Set.SVD" />
+					<include name="Store.SVD" />
+					<include name="Main.SVD" />
+					<include name="Sala_man.SVD" />
+					<include name="Bonu_man.SVD" />
+					<include name="Man_set.SVD" />
+					<include name="Man_stor.SVD" />
+					<include name="Sala_mem.SVD" />
+					<include name="Bonu_mem.SVD" />
+					<include name="Mem_set.SVD" />
+					<include name="Mem_stor.SVD" />
+					<include name="MEMBERMASTER-CLASS.rep" />
+					<include name="Allmem_m.OBJ" />
+					<include name="ADDRESSMASTER-CLASS.rep" />
+					<include name="Addr_m.OBJ" />
+					<include name="ADDRESS-CLASS.rep" />
+					<include name="Address.OBJ" />
+					<include name="ALLMEMBER-CLASS.rep" />
+					<include name="Allmem.OBJ" />
+					<include name="MANAGER-CLASS.rep" />
+					<include name="Manager.OBJ" />
+					<include name="MEMBER-CLASS.rep" />
+					<include name="Member.OBJ" />
+					<include name="Set.OBJ" />
+					<include name="Store.OBJ" />
+					<include name="Main.OBJ" />
+					<include name="Sala_man.OBJ" />
+					<include name="Bonu_man.OBJ" />
+					<include name="Man_set.OBJ" />
+					<include name="Man_stor.OBJ" />
+					<include name="Sala_mem.OBJ" />
+					<include name="Bonu_mem.OBJ" />
+					<include name="Mem_set.OBJ" />
+					<include name="Mem_stor.OBJ" />
+
+				</patternset>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="link_buildtool-init"
+	        description="リンカのプロパティを初期化します。"
+	        unless="link_buildtool-initialized">
+		<property name="link_buildtool-initialized" value="" />
+		<property name="link_buildtool-LinkerOptions"
+		          value=" /DEBUG /DYNAMICBASE:NO " />
+		<property name="link_buildtool-LinkerLibraryOptions" value="" />
+		<property name="link_buildtool-LinkerDllEntryOptions" value="" />
+		<property name="link_buildtool-Linker" value="link" />
+	</target>
+
+	<target name="link_buildtool-link_build"
+	        description="MAIN.exeの取得先にリンクします。"
+	        depends="link_buildtool-init,init,link_buildtool-check_MAIN.exe"
+	        unless="link_buildtool-MAIN.exe_uptodate">
+		<exec dir="."
+		      executable="${link_buildtool-Linker}"
+		      failonerror="${foe}">
+			<arg line="/LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86\&quot; /OUT:&quot;MAIN.exe&quot; ${link_buildtool-LinkerOptions} ${link_buildtool-LinkerLibraryOptions} ${link_buildtool-LinkerDllEntryOptions} &quot;Main.OBJ&quot; &quot;Manager.OBJ&quot; &quot;Sala_man.OBJ&quot; &quot;Bonu_man.OBJ&quot; &quot;Man_set.OBJ&quot; &quot;Man_stor.OBJ&quot; &quot;Member.OBJ&quot; &quot;Sala_mem.OBJ&quot; &quot;Bonu_mem.OBJ&quot; &quot;Mem_set.OBJ&quot; &quot;Mem_stor.OBJ&quot; &quot;Allmem.OBJ&quot; &quot;Set.OBJ&quot; &quot;Store.OBJ&quot; &quot;Allmem_m.OBJ&quot; &quot;Address.OBJ&quot; &quot;Addr_m.OBJ&quot;  &quot;${NETCOBOL}\F3BICIMP.LIB&quot; &quot;C:\Program Files (x86)\NetCOBOL\LIBCMT.LIB&quot; &quot;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86\KERNEL32.LIB&quot;" />
+		</exec>
+	</target>
+
+	<target name="link_buildtool-check_MAIN.exe"
+	        description="MAIN.exeが最新のファイルであるか調査中">
+		<uptodate property="link_buildtool-MAIN.exe_uptodate">
+			<srcfiles dir=".">
+				<patternset>
+					<include name="Main.OBJ" />
+					<include name="Manager.OBJ" />
+					<include name="Sala_man.OBJ" />
+					<include name="Bonu_man.OBJ" />
+					<include name="Man_set.OBJ" />
+					<include name="Man_stor.OBJ" />
+					<include name="Member.OBJ" />
+					<include name="Sala_mem.OBJ" />
+					<include name="Bonu_mem.OBJ" />
+					<include name="Mem_set.OBJ" />
+					<include name="Mem_stor.OBJ" />
+					<include name="Allmem.OBJ" />
+					<include name="Set.OBJ" />
+					<include name="Store.OBJ" />
+					<include name="Allmem_m.OBJ" />
+					<include name="Address.OBJ" />
+					<include name="Addr_m.OBJ" />
+				</patternset>
+			</srcfiles>
+			<mapper type="merge" to="${project_location}\MAIN.exe" />
+		</uptodate>
+	</target>
+	<target name="link_buildtool-link_rebuild">
+		<antcall target="link_buildtool-clean" />
+		<antcall target="link_buildtool-link_build" />
+	</target>
+
+	<target name="link_buildtool-clean"
+	        description="リンカのターゲットをすべてクリアします。"
+	        depends="link_buildtool-init,init">
+		<delete file="MAIN.exe" />
+		<delete file="MAIN.exe.in2" />
+		<delete file="MAIN.exp" />
+		<delete file="MAIN.lib" />
+
+	</target>
+
+	<target name="incremental_build"
+	        depends="cobol_buildtool-cobol_compile_build,link_buildtool-link_build" />
+
+	<target name="clean_build"
+	        depends="cobol_buildtool-clean,link_buildtool-clean" />
+</project>

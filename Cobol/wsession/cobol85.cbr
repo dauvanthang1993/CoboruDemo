@@ -1,0 +1,11 @@
+@CBR_ISAPI_LOGFILE=C:\etc\isapi.log
+@CBR_ISAPI_SEVERITY=0
+;@CBR_SAF_LOGFILE=C:\etc\saf.log
+;@CBR_SAF_SEVERITY=0
+@ShowIcon=NO
+@NoMessage=YES
+@MessOutFile=C:\etc\WSESSION.txt
+@WinCloseMsg=OFF
+
+SYS006=C:\cobol\samples\cobol\wsession\USERINFO
+SYS007=C:\cobol\samples\cobol\wsession\MONEYINFO

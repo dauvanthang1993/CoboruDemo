@@ -1,0 +1,25 @@
+[Encoding]
+Encoding=UTF8
+
+[Apdesigner Version Information]
+Version No=6.0
+
+[ProjectType]
+IsCobolSolution=true
+
+[CobolProject]
+Edition=6.000
+
+[TargetOptions]
+BuildMode=Debug
+
+[CobolCompilerOptions]
+TAB=TAB(4)
+SRF=SRF(VAR,VAR)
+D-CHECK=CHECK(ALL)
+LIB=LIB(../Sample17_LIB)
+ForceCheckAllInDebugMode=true
+REPIN=REPIN(../Sample16;../Sample17_DLL)
+
+[LinkerOptions]
+LinkerOtherOptions=/SUBSYSTEM:WINDOWS,5.01 

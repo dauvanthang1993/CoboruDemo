@@ -1,0 +1,32 @@
+<HTML>
+<HEAD>
+<TITLE>取引</TITLE>
+</HEAD>
+
+<BODY>
+<H1><FONT COLOR=Blue>取引</FONT></H1><BR>
+現在の残高は次のとおりです。
+金額を入力して、「預入」又は「払戻」を選択して下さい。
+
+<P>
+
+<!-- SAFアプリに移行する際 ACTION の部分にMIMEタイプの設定時に指定した拡張子を記述する必要があります -->
+<FORM METHOD="POST" ACTION="confirm.dll">
+
+<HR>
+    残高： //COBOL//BALANCE//COBOL//<BR>
+    <TD>金額：</TD>
+    <TD><INPUT SIZE=16 MAXLENGTH=16 TYPE="TEXT" NAME="MONEY"></TD>
+
+<HR>
+
+  <OL>
+  <LI><INPUT TYPE="RADIO" NAME="PROC" VALUE="DEPOSIT" CHECKED>預入<BR>
+  <LI><INPUT TYPE="RADIO" NAME="PROC" VALUE="REPAYMENT">払戻<BR>
+  </OL>
+	
+  <INPUT TYPE="SUBMIT" NAME="OK" VALUE="ＯＫ"><P>
+
+</FORM>
+</BODY>
+</HTML>

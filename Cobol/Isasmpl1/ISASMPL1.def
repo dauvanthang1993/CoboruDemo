@@ -1,0 +1,6 @@
+LIBRARY IsaSmpl1
+EXPORTS 
+    GetExtensionVersion 
+    HttpExtensionProc 
+    TerminateExtension 
+

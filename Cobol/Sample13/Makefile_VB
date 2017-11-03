@@ -1,0 +1,24 @@
+###############################################################################
+#                               NetCOBOL
+###############################################################################
+
+LINKOPTION = 
+VBPROJ_DIR=.\VBPROJ\ 
+VBPROJ_SRC=$(VBPROJ_DIR)AssemblyInfo.vb \
+	$(VBPROJ_DIR)Sample13.Designer.vb \
+	$(VBPROJ_DIR)Sample13.vb \
+	$(VBPROJ_DIR)Sample13.resX \
+	$(VBPROJ_DIR)sample13.sln 
+NETFRAMEWORKPATH=$(WINDIR)\Microsoft.NET\Framework\v4.0.30319\ 
+
+ALL : sample13.exe
+
+REBUILD : CLEAN ALL
+CLEAN :
+	$(NETFRAMEWORKPATH)MSBuild.exe $(VBPROJ_DIR)sample13.sln /t:Clean /p:Platform=x86,Configuration=Release
+
+
+sample13.exe : $(VBPROJ_SRC) MAKEFILE_VB
+	$(NETFRAMEWORKPATH)MSBuild.exe $(VBPROJ_DIR)sample13.sln /t:Build /p:Platform=x86,Configuration=Release
+
+

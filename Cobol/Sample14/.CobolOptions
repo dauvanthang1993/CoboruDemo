@@ -1,0 +1,44 @@
+[Encoding]
+Encoding=UTF8
+
+[Apdesigner Version Information]
+Version No=6.0
+
+
+[CobolCompilerOptions]
+TAB=TAB(4)
+SRF=SRF(VAR,VAR)
+D-CHECK=CHECK(ALL)
+ForceCheckAllInDebugMode=true
+
+[DependencyViewSourceFiles]
+CobolSourceFileCount=4
+CobolSourceFile4=K_sin.cob
+CobolSourceFile3=K_nyu.cob
+CobolSourceFile2=K_ken.cob
+CobolSourceFile1=K_syu.cob
+
+
+[CobolProject]
+Edition=7.000
+
+
+[TargetOptions]
+TargetName=K_KEN
+ApplicationArch=x86
+JEFOption=false
+TargetType=DLL
+BuildMode=Debug
+DLLUseCBR=false
+
+[SolutionOptionsUsing]
+ProjectCompilerOptionsCheck=on
+ProjectBuildToolResourceCheck=on
+ProjectFileContentsCheck=on
+ProjectRemoteTargetOptionsCheck=on
+ProjectBuildToolPreCompilerCheck=on
+ProjectBuildToolIDLPreCompilerCheck=on
+
+[LinkerOptions]
+LinkerOtherOptions=/EXPORT:K_SYU /EXPORT:K_KEN /EXPORT:K_NYU /EXPORT:K_SIN
+

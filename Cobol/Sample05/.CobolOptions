@@ -1,0 +1,21 @@
+[Encoding]
+Encoding=UTF8
+
+[Apdesigner Version Information]
+Version No=6.0
+
+[ProjectType]
+IsCobolSolution=true
+
+[CobolProject]
+Edition=6.000
+
+[TargetOptions]
+BuildMode=Debug
+
+[CobolCompilerOptions]
+TAB=TAB(4)
+SRF=SRF(FREE,FREE)
+D-CHECK=CHECK(ALL)
+LIB=LIB(../Sample05_LIB)
+ForceCheckAllInDebugMode=true

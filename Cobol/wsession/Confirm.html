@@ -1,0 +1,27 @@
+<HTML>
+<HEAD>
+<TITLE>確認</TITLE>
+</HEAD>
+
+<BODY>
+<H1><FONT COLOR=Blue>確認</FONT></H1><BR>
+内容は次のとおりです。確認後、「確認」又は「取消」を選択して下さい。
+<P>
+
+<!-- SAFアプリに移行する際 ACTION の部分にMIMEタイプの設定時に指定した拡張子を記述する必要があります -->
+<FORM METHOD="POST" ACTION="entry.dll">
+
+<HR>
+    //COBOL//PROCMONEY-NAME//COBOL// //COBOL//MONEY//COBOL//<BR>
+    取引後残高: //COBOL//BALANCE//COBOL//<BR>
+<HR>
+
+  <OL>
+  <LI><INPUT TYPE="RADIO" NAME="PROC" VALUE="CONFIRM" CHECKED>確認<BR>
+  <LI><INPUT TYPE="RADIO" NAME="PROC" VALUE="CANCEL">取消<BR>
+  </OL>
+
+<INPUT TYPE="SUBMIT" NAME="OK" VALUE="ＯＫ">
+</FORM>
+</BODY>
+</HTML>

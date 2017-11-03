@@ -1,0 +1,6 @@
+LIBRARY Startup 
+EXPORTS 
+    GetExtensionVersion 
+    HttpExtensionProc 
+    TerminateExtension 
+

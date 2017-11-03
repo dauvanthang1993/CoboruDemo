@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Sample15" default="incremental_build" basedir=".">
+	<fail unless="eclipse.running"
+	      message="このAntスクリプトはCOBOLビルダが内部的に利用するためのものであり、直接実行することはできません。" />
+	<property name="project.name" value="${ant.project.name}" />
+	<property name="foe" value="true" />
+	<eclipse.convertPath property="workspace_location" resourcepath="/" />
+	<eclipse.convertPath property="project_location"
+	                     resourcepath="/${project.name}" />
+	<property name="apdesigner.build.version" value="3.0.1" />
+	<property name="NETCOBOL" value="C:\Program Files (x86)\NetCOBOL" />
+
+	<target name="init">
+	</target>
+
+	<target name="cobol_buildtool-init"
+	        description="プロパティの初期化中"
+	        unless="cobol_buildtool-initialized">
+		<property name="cobol_buildtool-initialized" value="" />
+
+		<property name="cobol_buildtool-NAMECompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),NAME&quot; " />
+		<property name="cobol_buildtool-CompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR)&quot; " />
+		<property name="cobol_buildtool-CompilerOptionsOfMain"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),MAIN(WINMAIN)&quot; " />
+		<property name="cobol_buildtool-RepCompilerOptions"
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),CREATE(REP)&quot; " />
+		<property name="cobol_buildtool-CompilerOtherOptions" value="" />
+		<property name="cobol_buildtool-CobolCompiler" value="cobol32" />
+		<property name="cobol_buildtool-SourceFile" value="" />
+		<property name="cobol_buildtool-SourceReferenceFormat"
+		          value="SRF(VAR,VAR)" />
+		<property name="cobol_buildtool-UTF8Options" value="" />
+	</target>
+	<taskdef name="IAPWUptodate"
+	         classname="com.fujitsu.cbdt.build.taskdefs.IAPWUptodate" />
+
+	<target name="cobol_buildtool-compile_Address.OBJ"
+	        description="ソースファイルの翻訳 Address.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Address.OBJ"
+	        if="cobol_buildtool-Address.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Address.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Address.OBJ"
+	        description="Address.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Address.OBJ_uptodate"
+		              file="Address.cob"
+		              outputFiles="Address.OBJ"
+		              dependentFiles="" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Address.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Address.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Address.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Member.OBJ"
+	        description="ソースファイルの翻訳 Member.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Member.OBJ"
+	        if="cobol_buildtool-Member.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Member.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Member.OBJ"
+	        description="Member.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Member.OBJ_uptodate"
+		              file="Member.cob"
+		              outputFiles="Member.OBJ"
+		              dependentFiles="SAMPLE15/ADDR.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Member.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Member.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Member.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-compile_Main.OBJ"
+	        description="ソースファイルの翻訳 Main.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Main.OBJ"
+	        if="cobol_buildtool-Main.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptionsOfMain} ${cobol_buildtool-CompilerOtherOptions}  -M  -Dt &quot;Main.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_Main.OBJ"
+	        description="Main.OBJが最新のファイルであるか調査中"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-Main.OBJ_uptodate"
+		              file="Main.cob"
+		              outputFiles="Main.OBJ"
+		              dependentFiles="SAMPLE15/ADDR.rep;SAMPLE15/EMPLOYEE.rep;" />
+	</target>
+	<target name="cobol_buildtool-fail_for_Main.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-Main.cob_and_dependent_present">
+		<fail message="ファイルが欠落しています: Main.cob または依存ファイル " />
+	</target>
+
+	<target name="cobol_buildtool-FileCompile"
+	        description="ソースファイルの翻訳"
+	        depends="cobol_buildtool-init,init">
+		<exec dir="."
+		      executable="${cobol_buildtool-CobolCompiler}"
+		      failonerror="${foe}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions} ${cobol_buildtool-MainFileOption} ${cobol_buildtool-UTF8Options} &quot;${cobol_buildtool-SourceFile}&quot;" />
+		</exec>
+	</target>
+	<target name="cobol_buildtool-cobol_compile_build">
+
+		<antcall target="cobol_buildtool-compile_Address.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Member.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_Main.OBJ" />
+
+	</target>
+	<target name="cobol_buildtool-cobol_compile_rebuild">
+
+		<antcall target="cobol_buildtool-clean" />
+
+		<antcall target="cobol_buildtool-cobol_compile_build" />
+
+	</target>
+	<target name="cobol_buildtool-clean"
+	        description="翻訳ターゲットをすべてクリーン中"
+	        depends="cobol_buildtool-init,init">
+		<delete>
+			<fileset dir="." casesensitive="false">
+				<patternset>
+					<include name="Address.SVD" />
+					<include name="Member.SVD" />
+					<include name="Main.SVD" />
+					<include name="ADDR.rep" />
+					<include name="Address.OBJ" />
+					<include name="EMPLOYEE.rep" />
+					<include name="Member.OBJ" />
+					<include name="Main.OBJ" />
+
+				</patternset>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="link_buildtool-init"
+	        description="リンカのプロパティを初期化します。"
+	        unless="link_buildtool-initialized">
+		<property name="link_buildtool-initialized" value="" />
+		<property name="link_buildtool-LinkerOptions"
+		          value=" /DEBUG /DYNAMICBASE:NO " />
+		<property name="link_buildtool-LinkerLibraryOptions" value="" />
+		<property name="link_buildtool-LinkerDllEntryOptions" value="" />
+		<property name="link_buildtool-Linker" value="link" />
+	</target>
+
+	<target name="link_buildtool-link_build"
+	        description="MAIN.exeの取得先にリンクします。"
+	        depends="link_buildtool-init,init,link_buildtool-check_MAIN.exe"
+	        unless="link_buildtool-MAIN.exe_uptodate">
+		<exec dir="."
+		      executable="${link_buildtool-Linker}"
+		      failonerror="${foe}">
+			<arg line="/LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86\&quot; /OUT:&quot;MAIN.exe&quot; ${link_buildtool-LinkerOptions} ${link_buildtool-LinkerLibraryOptions} ${link_buildtool-LinkerDllEntryOptions} &quot;Main.OBJ&quot; &quot;Member.OBJ&quot; &quot;Address.OBJ&quot;  &quot;${NETCOBOL}\F3BICIMP.LIB&quot; &quot;C:\Program Files (x86)\NetCOBOL\LIBCMT.LIB&quot; &quot;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86\KERNEL32.LIB&quot;" />
+		</exec>
+	</target>
+
+	<target name="link_buildtool-check_MAIN.exe"
+	        description="MAIN.exeが最新のファイルであるか調査中">
+		<uptodate property="link_buildtool-MAIN.exe_uptodate">
+			<srcfiles dir=".">
+				<patternset>
+					<include name="Main.OBJ" />
+					<include name="Member.OBJ" />
+					<include name="Address.OBJ" />
+				</patternset>
+			</srcfiles>
+			<mapper type="merge" to="${project_location}\MAIN.exe" />
+		</uptodate>
+	</target>
+	<target name="link_buildtool-link_rebuild">
+		<antcall target="link_buildtool-clean" />
+		<antcall target="link_buildtool-link_build" />
+	</target>
+
+	<target name="link_buildtool-clean"
+	        description="リンカのターゲットをすべてクリアします。"
+	        depends="link_buildtool-init,init">
+		<delete file="MAIN.exe" />
+		<delete file="MAIN.exe.in2" />
+		<delete file="MAIN.exp" />
+		<delete file="MAIN.lib" />
+
+	</target>
+
+	<target name="incremental_build"
+	        depends="cobol_buildtool-cobol_compile_build,link_buildtool-link_build" />
+
+	<target name="clean_build"
+	        depends="cobol_buildtool-clean,link_buildtool-clean" />
+</project>

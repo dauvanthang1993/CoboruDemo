@@ -1,0 +1,43 @@
+###############################################################################
+#                               NetCOBOL
+###############################################################################
+
+LINKOPTION = 
+VBPROJ_DIR=.\VBPROJ\ 
+VBPROJ_SRC=$(VBPROJ_DIR)AssemblyInfo.vb \
+	$(VBPROJ_DIR)Error_h.vb \
+	$(VBPROJ_DIR)Error_h.Designer.vb \
+	$(VBPROJ_DIR)Error_h.resX \
+	$(VBPROJ_DIR)Nyukin.vb \
+	$(VBPROJ_DIR)Nyukin.Designer.vb \
+	$(VBPROJ_DIR)Nyukin.resX \
+	$(VBPROJ_DIR)Sample14_bas.vb \
+	$(VBPROJ_DIR)Sample14_frm.vb \
+	$(VBPROJ_DIR)Sample14_frm.Designer.vb \
+	$(VBPROJ_DIR)Sample14_frm.resX \
+	$(VBPROJ_DIR)Sele.vb \
+	$(VBPROJ_DIR)Sele.Designer.vb \
+	$(VBPROJ_DIR)Sele.resX \
+	$(VBPROJ_DIR)Sinki.vb \
+	$(VBPROJ_DIR)Sinki.Designer.vb \
+	$(VBPROJ_DIR)Sinki.resX \
+	$(VBPROJ_DIR)Sinkichk.vb \
+	$(VBPROJ_DIR)Sinkichk.Designer.vb \
+	$(VBPROJ_DIR)Sinkichk.resX \
+	$(VBPROJ_DIR)Syukin.vb \
+	$(VBPROJ_DIR)Syukin.Designer.vb \
+	$(VBPROJ_DIR)Syukin.resX \
+	$(VBPROJ_DIR)sample14.sln 
+NETFRAMEWORKPATH=$(WINDIR)\Microsoft.NET\Framework\v4.0.30319\ 
+
+ALL : sample14.exe
+
+REBUILD : CLEAN ALL
+CLEAN :
+	$(NETFRAMEWORKPATH)MSBuild.exe $(VBPROJ_DIR)sample14.sln /t:Clean /p:Platform=x86,Configuration=Release
+
+
+sample14.exe : $(VBPROJ_SRC) MAKEFILE_VB
+	$(NETFRAMEWORKPATH)MSBuild.exe $(VBPROJ_DIR)sample14.sln /t:Build /p:Platform=x86,Configuration=Release
+
+
