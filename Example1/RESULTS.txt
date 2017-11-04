@@ -1,0 +1,15 @@
+﻿1001 Apple                >>>>>> ERROR                                 
+1002 Orange               0100 400 000040000                           
+                          GROUP-COST:1 0000040000                      
+2001 Cocacola             0150 200 000030000                           
+2002 Sprite               0200 100 000020000                           
+2003 Milk                 0555 050 000027750                           
+                          GROUP-COST:2 0000077750                      
+3001 Ao phong xanh duong  >>>>>> ERROR                                 
+3002 Quan dui hoa         0500 030 000015000                           
+3003 Ao khoac thu         >>>>>> ERROR                                 
+                          GROUP-COST:3 0000015000                      
+                                Total: 0000132750                      
+PRODUCT TOTAL:008                                                      
+PRODUCT TOTAL: 003                                                     
+PRODUCT NORMAL:005                                                     
