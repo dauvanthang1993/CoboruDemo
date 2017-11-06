@@ -108,25 +108,25 @@
 	</target>
 
 	<target name="link_buildtool-link_build"
-	        description="Linking to get SAMPLE30.exe"
-	        depends="link_buildtool-init,init,link_buildtool-check_SAMPLE30.exe"
-	        unless="link_buildtool-SAMPLE30.exe_uptodate">
+	        description="Linking to get SAMPLE01.exe"
+	        depends="link_buildtool-init,init,link_buildtool-check_SAMPLE01.exe"
+	        unless="link_buildtool-SAMPLE01.exe_uptodate">
 		<exec dir="."
 		      executable="${link_buildtool-Linker}"
 		      failonerror="${foe}">
-			<arg line="/LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\ucrt\x86\&quot; /LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\um\x86\&quot; /OUT:&quot;SAMPLE30.exe&quot; ${link_buildtool-LinkerOptions} ${link_buildtool-LinkerLibraryOptions} ${link_buildtool-LinkerDllEntryOptions} &quot;Sample1.OBJ&quot;  &quot;${NETCOBOL}\F3BICIMP.LIB&quot; &quot;C:\Program Files (x86)\NetCOBOL\msvcrt.lib&quot; &quot;C:\Program Files (x86)\Windows Kits\10\lib\10.0.15063.0\um\x86\KERNEL32.LIB&quot;" />
+			<arg line="/LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\ucrt\x86\&quot; /LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\um\x86\&quot; /OUT:&quot;SAMPLE01.exe&quot; ${link_buildtool-LinkerOptions} ${link_buildtool-LinkerLibraryOptions} ${link_buildtool-LinkerDllEntryOptions} &quot;Sample1.OBJ&quot;  &quot;${NETCOBOL}\F3BICIMP.LIB&quot; &quot;C:\Program Files (x86)\NetCOBOL\msvcrt.lib&quot; &quot;C:\Program Files (x86)\Windows Kits\10\lib\10.0.15063.0\um\x86\KERNEL32.LIB&quot;" />
 		</exec>
 	</target>
 
-	<target name="link_buildtool-check_SAMPLE30.exe"
-	        description="Checking whether SAMPLE30.exe is up to date">
-		<uptodate property="link_buildtool-SAMPLE30.exe_uptodate">
+	<target name="link_buildtool-check_SAMPLE01.exe"
+	        description="Checking whether SAMPLE01.exe is up to date">
+		<uptodate property="link_buildtool-SAMPLE01.exe_uptodate">
 			<srcfiles dir="." casesensitive="false">
 				<patternset>
 					<include name="Sample1.OBJ" />
 				</patternset>
 			</srcfiles>
-			<mapper type="merge" to="${project_location}\SAMPLE30.exe" />
+			<mapper type="merge" to="${project_location}\SAMPLE01.exe" />
 		</uptodate>
 	</target>
 	<target name="link_buildtool-link_rebuild">
@@ -137,12 +137,12 @@
 	<target name="link_buildtool-clean"
 	        description="Cleaning all the linker targets"
 	        depends="link_buildtool-init,init">
-		<delete file="SAMPLE30.exe" />
-		<delete file="SAMPLE30.exe.in2" />
-		<delete file="SAMPLE30.exp" />
-		<delete file="SAMPLE30.lib" />
-		<delete file="SAMPLE30.ilk" />
-		<delete file="SAMPLE30.pdb" />
+		<delete file="SAMPLE01.exe" />
+		<delete file="SAMPLE01.exe.in2" />
+		<delete file="SAMPLE01.exp" />
+		<delete file="SAMPLE01.lib" />
+		<delete file="SAMPLE01.ilk" />
+		<delete file="SAMPLE01.pdb" />
 
 	</target>
 

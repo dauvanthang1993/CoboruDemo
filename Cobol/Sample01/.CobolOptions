@@ -28,8 +28,9 @@ ProjectRemoteTargetOptionsCheck=off
 ProjectBuildToolPreCompilerCheck=off
 ProjectBuildToolIDLPreCompilerCheck=off
 
+
 [TargetOptions]
-TargetName=SAMPLE30
+TargetName=SAMPLE01
 ApplicationArch=x86
 JEFOption=false
 TargetType=EXE

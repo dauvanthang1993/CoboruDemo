@@ -1,8 +1,9 @@
-﻿2001Cocacola            0150200
+﻿3002Quan dui hoan       0500k30
+2001Cocacola            0150200
 3001Ao phong xanh duong 0A00009
 1001Apple               A150300
 3003Ao khoac thu        0999A80
-1002Orange              0100400
+1002Orange              01004f0
 2002Sprite              0200100
 2003Milk                0555050
 3002Quan dui hoa        0500030
