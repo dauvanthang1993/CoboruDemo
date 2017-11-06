@@ -11,5 +11,5 @@
                           GROUP-COST:3 0000015000                      
                                 Total: 0000132750                      
 PRODUCT TOTAL:008                                                      
-PRODUCT TOTAL: 003                                                     
+PRODUCT ERROR :003                                                     
 PRODUCT NORMAL:005                                                     
