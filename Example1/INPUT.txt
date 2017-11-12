@@ -1,10 +1,34 @@
 ﻿1001Apple               2150300
+1002Quan dui hoa        0500030
 1002Orange              01004f0
+1002Sprite              0200100
+1003Milk                0555050
+1003Ao CHIM  thu        0909080
+1003Milk                0555050
 2001Cocacola            0150200
 2002Sprite              0200100
+2002Sprite              0200100
+2002Sprite              0200100
+2002Sprite              0200100
+2002Quan dui hoa        0500030
+2003Milk                0555050
+2003Milk                0555050
+2003Milk                0555050
+2003Ao CHIM  thu        0909080
 2003Milk                0555050
 3001Ao phong xanh duong 0A00009
-3002Quan dui hoa        0500030
 3002Quan dui hoan       0500k30
+3002Quan dui hoa        0500030
+3002Quan dui hoa        0500030
+3002Quan dui hoa        0500030
+3002Quan dui hoa        0500030
 3003Ao CHIM  thu        0909080
 3003Ao khoac thu        0999A80
+3003Ao CHIM  thu        0909080
+3003Ao CHIM  thu        0909080
+3003Ao CHIM  thu        0909080
+4002Sprite              0200100
+4002Quan dui hoa        0500030
+4003Ao CHIM  thu        0909080
+5002Sprite              0200100
+5003Milk                0555050
