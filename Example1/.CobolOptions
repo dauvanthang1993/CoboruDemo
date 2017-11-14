@@ -30,9 +30,11 @@ CobolSourceFile1=Example1.cob
 MainFile=Example1/Example1.cob
 
 
+
 [SolutionOptionsUsing]
 ProjectCompilerOptionsCheck=off
 ProjectBuildToolResourceCheck=off
+ProjectFileContentsCheck=off
 ProjectRemoteTargetOptionsCheck=off
 ProjectBuildToolPreCompilerCheck=off
 ProjectBuildToolIDLPreCompilerCheck=off
