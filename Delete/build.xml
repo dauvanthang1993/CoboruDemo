@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Sample06" default="incremental_build" basedir=".">
+<project name="Delete" default="incremental_build" basedir=".">
 	<fail unless="eclipse.running"
 	      message="This ant script is used internally for COBOL Builder, and not intended to run directly." />
 	<property name="project.name" value="${ant.project.name}" />
@@ -23,7 +23,7 @@
 		<property name="cobol_buildtool-CompilerOptions"
 		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR)&quot; " />
 		<property name="cobol_buildtool-CompilerOptionsOfMain"
-		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),MAIN(MAIN)&quot; " />
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),MAIN(WINMAIN)&quot; " />
 		<property name="cobol_buildtool-RepCompilerOptions"
 		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),CREATE(REP)&quot; " />
 		<property name="cobol_buildtool-CompilerOtherOptions" value="" />
@@ -41,7 +41,7 @@
 	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Sample6.OBJ"
 	        if="cobol_buildtool-Sample6.OBJ_uptodate">
 		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
-			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;Sample6.cob&quot;" />
+			<arg line=" ${cobol_buildtool-CompilerOptionsOfMain} ${cobol_buildtool-CompilerOtherOptions}  -M  -Dt &quot;Sample6.cob&quot;" />
 		</exec>
 	</target>
 
@@ -60,6 +60,30 @@
 		<fail message="File is missing: Sample6.cob or dependent files " />
 	</target>
 
+	<target name="cobol_buildtool-compile_SUMCALC.OBJ"
+	        description="Compiling the source file SUMCALC.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_SUMCALC.OBJ"
+	        if="cobol_buildtool-SUMCALC.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -Dt &quot;SUMCALC.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_SUMCALC.OBJ"
+	        description="Checking whether SUMCALC.OBJ is up to date"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-SUMCALC.OBJ_uptodate"
+		              file="SUMCALC.cob"
+		              outputFiles="SUMCALC.OBJ"
+		              dependentFiles="" />
+	</target>
+	<target name="cobol_buildtool-fail_for_SUMCALC.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-SUMCALC.cob_and_dependent_present">
+		<fail message="File is missing: SUMCALC.cob or dependent files " />
+	</target>
+
 	<target name="cobol_buildtool-FileCompile"
 	        description="Compiling the source file"
 	        depends="cobol_buildtool-init,init">
@@ -72,6 +96,8 @@
 	<target name="cobol_buildtool-cobol_compile_build">
 
 		<antcall target="cobol_buildtool-compile_Sample6.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_SUMCALC.OBJ" />
 
 	</target>
 	<target name="cobol_buildtool-cobol_compile_rebuild">
@@ -88,7 +114,9 @@
 			<fileset dir="." casesensitive="false">
 				<patternset>
 					<include name="Sample6.SVD" />
+					<include name="SUMCALC.SVD" />
 					<include name="Sample6.OBJ" />
+					<include name="SUMCALC.OBJ" />
 
 				</patternset>
 			</fileset>
@@ -108,25 +136,26 @@
 	</target>
 
 	<target name="link_buildtool-link_build"
-	        description="Linking to get SAMPLE6.exe"
-	        depends="link_buildtool-init,init,link_buildtool-check_SAMPLE6.exe"
-	        unless="link_buildtool-SAMPLE6.exe_uptodate">
+	        description="Linking to get Delete.exe"
+	        depends="link_buildtool-init,init,link_buildtool-check_Delete.exe"
+	        unless="link_buildtool-Delete.exe_uptodate">
 		<exec dir="."
 		      executable="${link_buildtool-Linker}"
 		      failonerror="${foe}">
-			<arg line="/LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\ucrt\x86\&quot; /LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\um\x86\&quot; /OUT:&quot;SAMPLE6.exe&quot; ${link_buildtool-LinkerOptions} ${link_buildtool-LinkerLibraryOptions} ${link_buildtool-LinkerDllEntryOptions} &quot;Sample6.OBJ&quot;  &quot;${NETCOBOL}\F3BICIMP.LIB&quot; &quot;C:\Program Files (x86)\NetCOBOL\msvcrt.lib&quot; &quot;C:\Program Files (x86)\Windows Kits\10\lib\10.0.15063.0\um\x86\KERNEL32.LIB&quot;" />
+			<arg line="/LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\ucrt\x86\&quot; /LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\um\x86\&quot; /OUT:&quot;Delete.exe&quot; ${link_buildtool-LinkerOptions} ${link_buildtool-LinkerLibraryOptions} ${link_buildtool-LinkerDllEntryOptions} &quot;Sample6.OBJ&quot; &quot;SUMCALC.OBJ&quot;  &quot;${NETCOBOL}\F3BICIMP.LIB&quot; &quot;C:\Program Files (x86)\NetCOBOL\msvcrt.lib&quot; &quot;C:\Program Files (x86)\Windows Kits\10\lib\10.0.15063.0\um\x86\KERNEL32.LIB&quot;" />
 		</exec>
 	</target>
 
-	<target name="link_buildtool-check_SAMPLE6.exe"
-	        description="Checking whether SAMPLE6.exe is up to date">
-		<uptodate property="link_buildtool-SAMPLE6.exe_uptodate">
+	<target name="link_buildtool-check_Delete.exe"
+	        description="Checking whether Delete.exe is up to date">
+		<uptodate property="link_buildtool-Delete.exe_uptodate">
 			<srcfiles dir="." casesensitive="false">
 				<patternset>
 					<include name="Sample6.OBJ" />
+					<include name="SUMCALC.OBJ" />
 				</patternset>
 			</srcfiles>
-			<mapper type="merge" to="${project_location}\SAMPLE6.exe" />
+			<mapper type="merge" to="${project_location}\Delete.exe" />
 		</uptodate>
 	</target>
 	<target name="link_buildtool-link_rebuild">
@@ -137,12 +166,12 @@
 	<target name="link_buildtool-clean"
 	        description="Cleaning all the linker targets"
 	        depends="link_buildtool-init,init">
-		<delete file="SAMPLE6.exe" />
-		<delete file="SAMPLE6.exe.in2" />
-		<delete file="SAMPLE6.exp" />
-		<delete file="SAMPLE6.lib" />
-		<delete file="SAMPLE6.ilk" />
-		<delete file="SAMPLE6.pdb" />
+		<delete file="Delete.exe" />
+		<delete file="Delete.exe.in2" />
+		<delete file="Delete.exp" />
+		<delete file="Delete.lib" />
+		<delete file="Delete.ilk" />
+		<delete file="Delete.pdb" />
 
 	</target>
 
