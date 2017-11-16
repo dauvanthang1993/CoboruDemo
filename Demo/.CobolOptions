@@ -32,9 +32,11 @@ MainFile=Demo/demo.cob
 
 
 
+
 [SolutionOptionsUsing]
 ProjectCompilerOptionsCheck=off
 ProjectBuildToolResourceCheck=off
+ProjectFileContentsCheck=off
 ProjectRemoteTargetOptionsCheck=off
 ProjectBuildToolPreCompilerCheck=off
 ProjectBuildToolIDLPreCompilerCheck=off

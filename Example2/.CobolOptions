@@ -5,8 +5,15 @@ Encoding=UTF8
 Version No=6.0
 
 
+[SolutionOptionsUsing]
+ProjectCompilerOptionsCheck=off
+ProjectBuildToolResourceCheck=off
+ProjectRemoteTargetOptionsCheck=off
+ProjectBuildToolPreCompilerCheck=off
+ProjectBuildToolIDLPreCompilerCheck=off
+
 [TargetOptions]
-TargetName=Delete
+TargetName=Example2
 ApplicationArch=x86
 JEFOption=false
 TargetType=EXE
@@ -25,16 +32,9 @@ D-CHECK=CHECK(ALL)
 ForceCheckAllInDebugMode=true
 
 
+
 [DependencyViewSourceFiles]
 CobolSourceFileCount=2
-CobolSourceFile2=SUMCALC.cob
-CobolSourceFile1=Sample6.cob
-MainFile=Delete/Sample6.cob
-
-[SolutionOptionsUsing]
-ProjectCompilerOptionsCheck=off
-ProjectBuildToolResourceCheck=off
-ProjectFileContentsCheck=off
-ProjectRemoteTargetOptionsCheck=off
-ProjectBuildToolPreCompilerCheck=off
-ProjectBuildToolIDLPreCompilerCheck=off
+CobolSourceFile2=CheckRecord.cob
+CobolSourceFile1=Example2.cob
+MainFile=Example2/Example2.cob
