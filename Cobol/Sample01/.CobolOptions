@@ -29,8 +29,9 @@ ProjectBuildToolPreCompilerCheck=off
 ProjectBuildToolIDLPreCompilerCheck=off
 
 
+
 [TargetOptions]
-TargetName=SAMPLE01
+TargetName=SAMPLE30
 ApplicationArch=x86
 JEFOption=false
 TargetType=EXE

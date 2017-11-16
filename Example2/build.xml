@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Sample06" default="incremental_build" basedir=".">
+<project name="Example2" default="incremental_build" basedir=".">
 	<fail unless="eclipse.running"
 	      message="This ant script is used internally for COBOL Builder, and not intended to run directly." />
 	<property name="project.name" value="${ant.project.name}" />
@@ -23,7 +23,7 @@
 		<property name="cobol_buildtool-CompilerOptions"
 		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR)&quot; " />
 		<property name="cobol_buildtool-CompilerOptionsOfMain"
-		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),MAIN(MAIN)&quot; " />
+		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),MAIN(WINMAIN)&quot; " />
 		<property name="cobol_buildtool-RepCompilerOptions"
 		          value="  -WC&quot;CHECK(ALL),TAB(4),SRF(VAR,VAR),CREATE(REP)&quot; " />
 		<property name="cobol_buildtool-CompilerOtherOptions" value="" />
@@ -36,28 +36,52 @@
 	<taskdef name="IAPWUptodate"
 	         classname="com.fujitsu.cbdt.build.taskdefs.IAPWUptodate" />
 
-	<target name="cobol_buildtool-compile_Sample6.OBJ"
-	        description="Compiling the source file Sample6.cob ..."
-	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Sample6.OBJ"
-	        if="cobol_buildtool-Sample6.OBJ_uptodate">
+	<target name="cobol_buildtool-compile_Example2.OBJ"
+	        description="Compiling the source file Example2.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Example2.OBJ"
+	        if="cobol_buildtool-Example2.OBJ_uptodate">
 		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
-			<arg line=" ${cobol_buildtool-CompilerOptionsOfMain} ${cobol_buildtool-CompilerOtherOptions}  -M  -Dt &quot;Sample6.cob&quot;" />
+			<arg line=" ${cobol_buildtool-CompilerOptionsOfMain} ${cobol_buildtool-CompilerOtherOptions}  -M  -WC&quot;SCS(UTF8),RCS(UTF16)&quot;  -Dt &quot;Example2.cob&quot;" />
 		</exec>
 	</target>
 
-	<target name="cobol_buildtool-check_Sample6.OBJ"
-	        description="Checking whether Sample6.OBJ is up to date"
+	<target name="cobol_buildtool-check_Example2.OBJ"
+	        description="Checking whether Example2.OBJ is up to date"
 	        depends="cobol_buildtool-init,init">
 		<IAPWUptodate projectLocation="${project_location}"
-		              property="cobol_buildtool-Sample6.OBJ_uptodate"
-		              file="Sample6.cob"
-		              outputFiles="Sample6.OBJ"
+		              property="cobol_buildtool-Example2.OBJ_uptodate"
+		              file="Example2.cob"
+		              outputFiles="Example2.OBJ"
 		              dependentFiles="" />
 	</target>
-	<target name="cobol_buildtool-fail_for_Sample6.cob"
+	<target name="cobol_buildtool-fail_for_Example2.cob"
 	        if="${foe}"
-	        unless="cobol_buildtool-Sample6.cob_and_dependent_present">
-		<fail message="File is missing: Sample6.cob or dependent files " />
+	        unless="cobol_buildtool-Example2.cob_and_dependent_present">
+		<fail message="File is missing: Example2.cob or dependent files " />
+	</target>
+
+	<target name="cobol_buildtool-compile_CheckRecord.OBJ"
+	        description="Compiling the source file CheckRecord.cob ..."
+	        depends="cobol_buildtool-init,init,cobol_buildtool-check_CheckRecord.OBJ"
+	        if="cobol_buildtool-CheckRecord.OBJ_uptodate">
+		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
+			<arg line=" ${cobol_buildtool-CompilerOptions} ${cobol_buildtool-CompilerOtherOptions}  -NM  -WC&quot;SCS(UTF8),RCS(UTF16)&quot;  -Dt &quot;CheckRecord.cob&quot;" />
+		</exec>
+	</target>
+
+	<target name="cobol_buildtool-check_CheckRecord.OBJ"
+	        description="Checking whether CheckRecord.OBJ is up to date"
+	        depends="cobol_buildtool-init,init">
+		<IAPWUptodate projectLocation="${project_location}"
+		              property="cobol_buildtool-CheckRecord.OBJ_uptodate"
+		              file="CheckRecord.cob"
+		              outputFiles="CheckRecord.OBJ"
+		              dependentFiles="" />
+	</target>
+	<target name="cobol_buildtool-fail_for_CheckRecord.cob"
+	        if="${foe}"
+	        unless="cobol_buildtool-CheckRecord.cob_and_dependent_present">
+		<fail message="File is missing: CheckRecord.cob or dependent files " />
 	</target>
 
 	<target name="cobol_buildtool-FileCompile"
@@ -71,7 +95,9 @@
 	</target>
 	<target name="cobol_buildtool-cobol_compile_build">
 
-		<antcall target="cobol_buildtool-compile_Sample6.OBJ" />
+		<antcall target="cobol_buildtool-compile_Example2.OBJ" />
+
+		<antcall target="cobol_buildtool-compile_CheckRecord.OBJ" />
 
 	</target>
 	<target name="cobol_buildtool-cobol_compile_rebuild">
@@ -87,8 +113,10 @@
 		<delete>
 			<fileset dir="." casesensitive="false">
 				<patternset>
-					<include name="Sample6.SVD" />
-					<include name="Sample6.OBJ" />
+					<include name="Example2.SVD" />
+					<include name="CheckRecord.SVD" />
+					<include name="Example2.OBJ" />
+					<include name="CheckRecord.OBJ" />
 
 				</patternset>
 			</fileset>
@@ -108,25 +136,26 @@
 	</target>
 
 	<target name="link_buildtool-link_build"
-	        description="Linking to get SAMPLE6.exe"
-	        depends="link_buildtool-init,init,link_buildtool-check_SAMPLE6.exe"
-	        unless="link_buildtool-SAMPLE6.exe_uptodate">
+	        description="Linking to get Example2.exe"
+	        depends="link_buildtool-init,init,link_buildtool-check_Example2.exe"
+	        unless="link_buildtool-Example2.exe_uptodate">
 		<exec dir="."
 		      executable="${link_buildtool-Linker}"
 		      failonerror="${foe}">
-			<arg line="/LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\ucrt\x86\&quot; /LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\um\x86\&quot; /OUT:&quot;SAMPLE6.exe&quot; ${link_buildtool-LinkerOptions} ${link_buildtool-LinkerLibraryOptions} ${link_buildtool-LinkerDllEntryOptions} &quot;Sample6.OBJ&quot;  &quot;${NETCOBOL}\F3BICIMP.LIB&quot; &quot;C:\Program Files (x86)\NetCOBOL\msvcrt.lib&quot; &quot;C:\Program Files (x86)\Windows Kits\10\lib\10.0.15063.0\um\x86\KERNEL32.LIB&quot;" />
+			<arg line="/LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\ucrt\x86\&quot; /LIBPATH:&quot;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\um\x86\&quot; /OUT:&quot;Example2.exe&quot; ${link_buildtool-LinkerOptions} ${link_buildtool-LinkerLibraryOptions} ${link_buildtool-LinkerDllEntryOptions} &quot;Example2.OBJ&quot; &quot;CheckRecord.OBJ&quot;  &quot;${NETCOBOL}\F3BICIMP.LIB&quot; &quot;C:\Program Files (x86)\NetCOBOL\msvcrt.lib&quot; &quot;C:\Program Files (x86)\Windows Kits\10\lib\10.0.15063.0\um\x86\KERNEL32.LIB&quot;" />
 		</exec>
 	</target>
 
-	<target name="link_buildtool-check_SAMPLE6.exe"
-	        description="Checking whether SAMPLE6.exe is up to date">
-		<uptodate property="link_buildtool-SAMPLE6.exe_uptodate">
+	<target name="link_buildtool-check_Example2.exe"
+	        description="Checking whether Example2.exe is up to date">
+		<uptodate property="link_buildtool-Example2.exe_uptodate">
 			<srcfiles dir="." casesensitive="false">
 				<patternset>
-					<include name="Sample6.OBJ" />
+					<include name="Example2.OBJ" />
+					<include name="CheckRecord.OBJ" />
 				</patternset>
 			</srcfiles>
-			<mapper type="merge" to="${project_location}\SAMPLE6.exe" />
+			<mapper type="merge" to="${project_location}\Example2.exe" />
 		</uptodate>
 	</target>
 	<target name="link_buildtool-link_rebuild">
@@ -137,12 +166,12 @@
 	<target name="link_buildtool-clean"
 	        description="Cleaning all the linker targets"
 	        depends="link_buildtool-init,init">
-		<delete file="SAMPLE6.exe" />
-		<delete file="SAMPLE6.exe.in2" />
-		<delete file="SAMPLE6.exp" />
-		<delete file="SAMPLE6.lib" />
-		<delete file="SAMPLE6.ilk" />
-		<delete file="SAMPLE6.pdb" />
+		<delete file="Example2.exe" />
+		<delete file="Example2.exe.in2" />
+		<delete file="Example2.exp" />
+		<delete file="Example2.lib" />
+		<delete file="Example2.ilk" />
+		<delete file="Example2.pdb" />
 
 	</target>
 

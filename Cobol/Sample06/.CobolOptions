@@ -25,7 +25,7 @@ Edition=7.000
 [DependencyViewSourceFiles]
 CobolSourceFileCount=1
 CobolSourceFile1=Sample6.cob
-
+MainFile=Sample06/Sample6.cob
 [SolutionOptionsUsing]
 ProjectCompilerOptionsCheck=on
 ProjectBuildToolResourceCheck=on
