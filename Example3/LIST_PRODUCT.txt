@@ -7,17 +7,19 @@
 
          ID        NAME              OLD_AMOUNT  IN_AMOUNT  OUT_AMOUNT  NEW_AMOUNT  SAFE_AMOUNT  ERROR                  
 
-         01004     SAMSUNG S7          2,333                              2,333         100                             
+        (0100100109922)                                                                                                 
+
+        (0100200100000)                                                                                                 
+
+         01004     SAMSUNG S7          2,333                     50       2,283         100                             
 
          01006     IPHONE X                0                                  0          10        -*-                  
 
          01007     IPHONE 2                0                                  0          10        -*-                  
 
-         01013     IPHONEX2                0       1,232        231       1,001          10                             
+         01013     IPHONEX2                0                                  0          10        -*-                  
 
          01014     IPHDDE X                0                                  0          10        -*-                  
-
-        (0101523110123)                                                                                                 
 
          01016     NOKIAD X                0                                  0          10        -*-                  
 
@@ -43,9 +45,7 @@
 
         (0103812311232)                                                                                                 
 
-         01041     IPHONE 2                0                                  0          10        -*-                  
-
-        (0104222221111)                                                                                                                                                                                                                         
+         01041     IPHONE 2                0                                  0          10        -*-                                                                                                                                          
 
 
 
@@ -53,6 +53,8 @@
                                         * * * INVENTORY LIST * * *                                                      
 
          ID        NAME              OLD_AMOUNT  IN_AMOUNT  OUT_AMOUNT  NEW_AMOUNT  SAFE_AMOUNT  ERROR                  
+
+        (0104222221111)                                                                                                 
 
         (0104522211110)                                                                                                 
 
