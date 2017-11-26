@@ -1,7 +1,7 @@
-01004SAMSUNG S7     23330100                                                    
+01004SAMSUNG S7     22830100                                                    
 01006IPHONE X       00000010                                                    
 01007IPHONE 2       00000010                                                    
-01013IPHONEX2       10010010                                                    
+01013IPHONEX2       00000010                                                    
 01014IPHDDE X       00000010                                                    
 01016NOKIAD X       00000010                                                    
 01021NOKIA 4X       00000010                                                    
