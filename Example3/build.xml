@@ -41,7 +41,7 @@
 	        depends="cobol_buildtool-init,init,cobol_buildtool-check_Example3.OBJ"
 	        if="cobol_buildtool-Example3.OBJ_uptodate">
 		<exec dir="." executable="${cobol_buildtool-CobolCompiler}">
-			<arg line=" ${cobol_buildtool-CompilerOptionsOfMain} ${cobol_buildtool-CompilerOtherOptions}  -M  -Dt &quot;Example3.cob&quot;" />
+			<arg line=" ${cobol_buildtool-CompilerOptionsOfMain} ${cobol_buildtool-CompilerOtherOptions}  -M  -WC&quot;SCS(UTF8),RCS(UTF16)&quot;  -Dt &quot;Example3.cob&quot;" />
 		</exec>
 	</target>
 
